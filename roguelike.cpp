@@ -6,7 +6,6 @@
 using namespace std;
 
 void centralizarTexto(const string& text) {
-
     // Pega o tamanho da tela do console
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -39,19 +38,19 @@ int movimento()
     //FIM: COMANDOS PARA REPOSICIONAR O CURSOR NO INICIO DA TELA
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, ACIMA.
 
-    int mapa[7][10] = {
-    {4,2,2,2,2,2,3,0,0,0,},
-    {1,0,0,0,0,0,1,0,0,0,},
-    {1,0,0,0,4,2,7,2,2,2,},
-    {1,0,0,0,1,0,0,0,0,0,},
-    {8,2,0,0,1,0,4,2,2,2,},
-    {1,0,0,0,0,0,1,0,0,0,},
-    {5,2,2,2,2,2,6,0,0,0,},
+    int mapa[7][20] = {
+    {4,2,2,2,2,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {1,0,0,0,4,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2},
+    {1,0,0,0,1,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9},
+    {8,2,0,0,1,0,4,2,2,2,2,2,2,2,2,2,2,2,2,2},
+    {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {5,2,2,2,2,2,6,0,0,0,0,0,0,0,0,0,0,0,0,0},
     };
 
 
     //Posicao inicial do personagem no console
-    int x = 3, y = 5;
+    int x = 5, y = 1;
     //Variavel para tecla precionada
     char tecla;
 
@@ -61,11 +60,11 @@ int movimento()
 
         ///Imprime o jogo: mapa e personagem.
         for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 20; j++) {
                 if (i == x && j == y) {
                     cout << char(190); //personagem 
                 }                                               // nessa parte, se o usuario esta em uma das pósicoes do mapa, esse pedaço do mapa é 
-                else {                                          //subtituida pelo boneco, SENAO, No caso, as outras posicoes sao exibidascomo o mapa
+                else {                                          // subtituida pelo boneco, SENAO, No caso, as outras posicoes sao exibidascomo o mapa
                     switch (mapa[i][j]) {
                     case 0: cout << " "; break; //caminho
                     case 1: cout << char(186); break; //parede
@@ -76,6 +75,7 @@ int movimento()
                     case 6: cout << char(188); break;
                     case 7: cout << char(202); break;
                     case 8: cout << char(204); break;
+                    case 9: cout << char(95); break;
                         //default: cout<<"-"; //erro
                     } //fim switch
                 }
@@ -89,22 +89,18 @@ int movimento()
             switch (tecla)
             {
             case 72: case 'w': ///cima
-                x--;
+                if(mapa[x - 1][y] == 0 || mapa[x - 1][y] == 9) x--;
                 break;
             case 80: case 's': ///baixo
-                x++;
+                if (mapa[x + 1][y] == 0 || mapa[x + 1][y] == 9) x++;
                 break;
             case 75:case 'a': ///esquerda
-                y--;
+                if (mapa[x][y - 1] == 0 || mapa[x][y - 1] == 9) y--;
                 break;
             case 77: case 'd': ///direita
-                y++;
+                if (mapa[x][y + 1] == 0 || mapa[x][y + 1] == 9) y++;
                 break;
             }
-        }
-
-        if (y == 11) {
-            exit(0);
         }
 
 
@@ -125,7 +121,12 @@ int main() {
         movimento();
     }
     else if (opcao == 2) { // Guia
+        char a = '0';
+
         centralizarTexto("GUIA E MANUAL");
+        cout << " ";
+        cin >> a;
+        return main();
     }
     else { // Exit game
         centralizarTexto("Jogo Finalizado, Ate a proxima!");
