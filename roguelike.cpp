@@ -11,7 +11,10 @@ struct Jogador {
     int pontuacao = 0;
     int pocao = 0;
 };
-
+struct Inimigo {
+    int vida = 10;
+    int x = 0, y = 0;
+};
 
 void centralizarTexto(const string& text) {
     // Pega o tamanho da tela do console
@@ -27,10 +30,14 @@ void centralizarTexto(const string& text) {
     cout << string(padding, ' ') << text << endl;
 
 }
+void enemy() {
 
-int movimento()
+}
+
+int jogo()
 {
     Jogador jogador;
+    Inimigo inimigo;
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -47,10 +54,10 @@ int movimento()
     //FIM: COMANDOS PARA REPOSICIONAR O CURSOR NO INICIO DA TELA
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, ACIMA.
 
-    int mapa[28][120] = {
+    int mapa[7][20] = {
     {2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},
-    {1,0,0,0,0,0,4,1,0,0,0,0,0,0,0,0,0,0,0,0},
-    {1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0},
+    {1,0,5,0,0,0,4,1,0,0,0,0,0,0,0,0,0,0,0,0},
+    {1,0,5,5,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0},
     {1,0,0,0,1,0,0,0,0,0,3,3,3,3,3,3,3,3,3,3},
     {1,2,0,0,1,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0},
     {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -62,6 +69,7 @@ int movimento()
 
     //Posicao inicial do personagem no console
     jogador.x = 5, jogador.y = 1;
+    inimigo.x = 1, inimigo.y = 1;
     //Variavel para tecla precionada
     char tecla;
 
@@ -75,7 +83,9 @@ int movimento()
                 if (i == jogador.x && j == jogador.y) {
                     cout << char(190); //personagem 
                 } 
-
+               // if (i == inimigo.x && j == inimigo.y) {
+                 //   cout << char(38);
+                //}
                 else {                                         
                     switch (mapa[i][j]) {
                     case 0: cout << " "; break; //caminho
@@ -83,6 +93,8 @@ int movimento()
                     case 2: cout << char(205); break; //parede horizontal
                     case 3: cout << char(95); break;
                     case 4: cout << char(117); break;
+                    case 5: cout << char(88); break;
+                    case 6: cout << char(38); break;
                         //default: cout<<"-"; //erro
                     } //fim switch
                 }
@@ -96,12 +108,17 @@ int movimento()
             jogador.pontuacao += 50;
             mapa[jogador.x][jogador.y] = 0;
         }
+        if (mapa[jogador.x][jogador.y] == 5) {
+           jogador.vida -= 5;
+          mapa[jogador.x][jogador.y] = 0;
+        }
 
         ///executa os movimentos
         if (_kbhit()) { // SE _kbhit == true signifia se o usuario apertou ALGUM BOTAO, depois o getch pega essa botao pra jogar pro switch
             tecla = _getch(); // pega o que o usuario esta escrevendo e baseado nesse valor executa o switch abaixo
             switch (tecla)
             {
+                
             case 72: case 'w': ///cima
                 if(mapa[jogador.x - 1][jogador.y] == 0 || mapa[jogador.x - 1][jogador.y] > 2) jogador.x--;
                 break;
@@ -124,12 +141,25 @@ int movimento()
 
         }
 
-
+        if (jogador.vida <= 0){
+            system("cls");
+            cout << "\n\n\n\n\n\n\n";
+            centralizarTexto("Voce Morreu! Deseja jogar novamente? (S para sim, N para nao)");
+            cout << "\n\n\n\n\n\n\n";
+            char escolha;
+            cin >> escolha;
+            if (escolha == 's' || escolha == 'S') {
+                system("cls");
+                return jogo();
+            } else {
+                break;
+            }
+        }
     } //fim do laco do jogo
 
     return 0;
 }
-int main() {
+int menu() {
     int opcao = 0;
     cout << "\n\n\n\n\n\n\n\n\n";
     centralizarTexto("MENU\n");
@@ -139,19 +169,22 @@ int main() {
     cin >> opcao;
     system("cls"); // limpa o console apos a opção ser escolhida
     if (opcao == 1) { // Start Game
-        movimento();
+        jogo();
 
     }
     else if (opcao == 2) { // Guia
         char a = '0';
 
-        centralizarTexto("GUIA E MANUAL");
+        centralizarTexto("GUIA E MANUALl");
         cout << " ";
         cin >> a;
-        return main();
+        return menu();
     }
     else { // Exit game
         centralizarTexto("Jogo Finalizado, Ate a proxima!");
         return 0;
     }
+}
+int main() {
+    menu();
 }
