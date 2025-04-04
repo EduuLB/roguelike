@@ -6,20 +6,34 @@
 #include <cstdlib>
 using namespace std;
 
+    int mapa[7][20] = {
+        {2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,0,0,0,0,0,8,1,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0},
+        {1,0,0,0,1,0,0,0,0,3,5,5,5,5,5,5,5,5,5,5},
+        {1,2,0,0,1,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0},
+        {1,0,0,0,0,0,6,1,0,0,0,0,0,0,0,0,0,0,0,0},
+        {2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},
+    };
+
 struct Jogador {
-    int x = 0, y = 0;
+    int x = 5, y = 1;
     int vida = 10;
     int pontuacao = 0;
     int pocao = 0;
-    bool chave = false;
+    int chave = 0;
 };
 
 struct Inimigo {
-    int vida = 10;
+    int vida = 0;
     int x = 0, y = 0;
-    int pocao = 1;
-    int acao = 1;
+   //  int pocao = 1;
+    int acao = 0;
 };
+
+void corTexto(int cor) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
+}
 
 void centralizarTexto(const string& text) {
     // Pega o tamanho da tela do console
@@ -34,21 +48,23 @@ void centralizarTexto(const string& text) {
     // Imprime os necessários pra centralizar
     cout << string(padding, ' ') << text << endl;
 }
-void abrirPorta(bool &chave, int x, int y, int mapa[7][20])
+
+void abrirPorta(int &chave, int x, int y)
 {
-    if (chave == true)
+    if (chave > 0)
     {
         if (mapa[x + 1][y] == 3) mapa[x + 1][y] = 0;
         if (mapa[x - 1][y] == 3) mapa[x - 1][y] = 0;
         if (mapa[x][y + 1] == 3) mapa[x][y + 1] = 0;
         if (mapa[x][y - 1] == 3) mapa[x][y - 1] = 0;
         cout << "\nPorta Aberta!\n";
+        chave--;
         system("pause");
         system("cls");
     }
 }
 
-void moverInimigo(Inimigo& inimigo, int mapa[7][20]) {
+void moverInimigo(Inimigo& inimigo) {
     int direcao = rand() % 4; // 0: cima, 1: baixo, 2: esquerda, 3: direita
     int novaX = inimigo.x, novaY = inimigo.y;
 
@@ -76,16 +92,16 @@ void moverInimigo(Inimigo& inimigo, int mapa[7][20]) {
     inimigo.y = novaY;
 }
 
-void batalha(Jogador& jogador, Inimigo& inimigo, int mapa[7][20]) {
-    while (jogador.vida > 0 && inimigo.vida > 0) {
+void batalha(Jogador& jogador, Inimigo& inimigo) {
+    while (jogador.vida > 0) {
         cout << "\nEscolha uma acao:\n";
-        cout << "1. Atacar\n";
-        cout << "2. Defender\n";
-        cout << "3. Usar Pocao\n";
+        cout << "1. Pedra\n";
+        cout << "2. Papel\n";
+        cout << "3. Tesoura\n";
         char escolha;
         cin >> escolha;
 
-      /*   system("cls"); 
+         system("cls"); 
          for (int i = 0; i < 7; i++) {  
             for (int j = 0; j < 20; j++) {
                 if (i == jogador.x && j == jogador.y) {
@@ -110,46 +126,60 @@ void batalha(Jogador& jogador, Inimigo& inimigo, int mapa[7][20]) {
             }
             cout << endl;
         }
-        */ // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
+         // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
         // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
         inimigo.acao = rand() % 3;
-        if (escolha == '1') {
+        if (escolha == '1') { // Pedra
 	            if (inimigo.acao == 0) {
-		           cout << "\nOs Dois Atacaram\n";
+		            cout << "\nPedra X Pedra, nada aconteceu\n";
+
 	            }
         		else if (inimigo.acao == 1) {
-		            cout << "\nJogador Atacou, inimigo defendeu\n";
+		            cout << "\nPedra X Papel, Voce tomou Dano!\n";
+                    jogador.vida-=2;
 	            } 
 	            else if (inimigo.acao == 2){
-	                cout << "\nJogador Atacou, inimigo usou uma pocao\n";
+	                cout << "\nPedra X Tesoura, Voce causou Dano""\n";
+                    inimigo.vida-=2;
 	            }
-        } else if (escolha == '2') {
+        } else if (escolha == '2') { // Papel
         		if (inimigo.acao == 0) {
-		           cout << "\nJogador Defendeu, inimigo atacou\n";
+		            cout << "\nPapel X Pedra, Voce causou Dano\n";
+                    inimigo.vida-=2;
 	            }
         		else if (inimigo.acao == 1) {
-		            cout << "\nJogador Defendeu, inimigo defendeu\n";
+		            cout << "\nPapel X Papel, nada aconteceu\n";
 	            } 
 	            else if (inimigo.acao == 2){
-	                cout << "\nJogador Defendeu, inimigo usou pocao\n";
+	                cout << "\nPapel X Tesoura, Voce tomou dano!\n";
+	            	jogador.vida-=2;
 	            }
 
-        } else if (escolha == '3') {
+        } else if (escolha == '3') { // Tesoura
         		if (inimigo.acao == 0) {
-		           cout << "\nJogador Usou pocao, inimigo atacou\n";
+					cout << "\nTesoura X Pedra, voce tomou dano!\n";
+        			jogador.vida-=2;
 	            }
         		else if (inimigo.acao == 1) {
-		            cout << "\nJogador Usou pocao, inimigo defendeu\n";
+		            cout << "\nTesoura X Papel, voce causou dano!\n";
+                    inimigo.vida-=2;
 	            } 
 	            else if (inimigo.acao == 2){
-	                cout << "\nJogador Usou pocao, inimigo usou uma pocao\n";
+	                cout << "\nTesoura X Tesoura, nada aconteceu\n";
 	            }
 	        
         } else {
-	        cout << "\nescolha Invalida!";
+	        cout << "\n escolha Invalida!";
              
         }
-        
+
+        if (inimigo.vida <= 0)
+        {
+	        inimigo.x = -1, inimigo.y = -1;
+            system("cls");
+            break;
+            
+        }
        
     }
 }
@@ -157,7 +187,8 @@ void batalha(Jogador& jogador, Inimigo& inimigo, int mapa[7][20]) {
 int jogo() {
     srand(static_cast<unsigned int>(time(0)));
     Jogador jogador;
-    Inimigo inimigo;
+    Inimigo inimigo = {5, 0, 0, 1};
+    Inimigo inimigo2 = {5, 0, 0, 1};
 
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
@@ -175,18 +206,7 @@ int jogo() {
     //FIM: COMANDOS PARA REPOSICIONAR O CURSOR NO INICIO DA TELA
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, ACIMA.
 
-    int mapa[7][20] = {
-        {2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},
-        {1,0,0,0,0,0,8,1,0,0,0,0,0,0,0,0,0,0,0,0},
-        {1,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0},
-        {1,0,0,0,1,0,0,0,0,3,5,5,5,5,5,5,5,5,5,5},
-        {1,2,0,0,1,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0},
-        {1,0,0,0,0,0,6,1,0,0,0,0,0,0,0,0,0,0,0,0},
-        {2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},
-    };
-
     //Posicao inicial do personagem no console
-    jogador.x = 5, jogador.y = 1;
     inimigo.x = 1, inimigo.y = 1;
 
     long long tempoAnterior = GetTickCount64(); // Tempo anterior do movimento do inimigo
@@ -224,7 +244,7 @@ int jogo() {
             }
             cout << "\n";
         } //fim for mapa
-        cout << "Vidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao;
+        cout << "Vidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave;
 
         if (mapa[jogador.x][jogador.y] == 6) {
             jogador.pocao += 3;
@@ -241,19 +261,19 @@ int jogo() {
         }
         if (mapa[jogador.x+1][jogador.y] == 3 || mapa[jogador.x-1][jogador.y] == 3 || mapa[jogador.x][jogador.y+1] == 3 ||mapa[jogador.x][jogador.y-1] == 3)
         {
-            abrirPorta(jogador.chave, jogador.x, jogador.y, mapa);
+            abrirPorta(jogador.chave, jogador.x, jogador.y);
         }
 
         tempoAtual = GetTickCount64();
 
         // Se se passou 1 segundo (1000 milissegundos), move o inimigo
         if (tempoAtual - tempoAnterior >= 500) {
-            moverInimigo(inimigo, mapa);
+            moverInimigo(inimigo);
             tempoAnterior = tempoAtual; // Atualiza o tempo anterior para o tempo atual
         }
 
         if (jogador.x == inimigo.x && jogador.y == inimigo.y) {
-            batalha(jogador, inimigo, mapa);
+            batalha(jogador, inimigo);
         }
 
         ///executa os movimentos
@@ -272,9 +292,9 @@ int jogo() {
             case 77: case 'd': ///direita
                 if (mapa[jogador.x][jogador.y + 1] == 0 || mapa[jogador.x][jogador.y + 1] > 4) jogador.y++;
                 break;
-            case 'g':
+            case 'e':
                 if (jogador.pocao >= 1) {
-                    jogador.vida += 2;
+                    jogador.vida += 3;
                     jogador.pocao--;
                 }
                 break;
@@ -296,6 +316,7 @@ int jogo() {
                 break;
             }
         }
+       
     } //fim do laço do jogo
 
     return 0;
@@ -304,10 +325,13 @@ int jogo() {
 int main() {
     int opcao = 0;
     cout << "\n\n\n\n\n\n\n\n\n";
+    corTexto(3);
     centralizarTexto("MENU\n");
+    corTexto(1);
     centralizarTexto("1- Iniciar Jogo\n");
     centralizarTexto("2- Guia\n");
     centralizarTexto("3- Sair do Jogo\n");
+    corTexto(7);
     cin >> opcao;
     system("cls"); // limpa o console após a opção ser escolhida
 
@@ -320,18 +344,28 @@ int main() {
         centralizarTexto("GUIA E MANUAL \n");
         centralizarTexto("Voce nasce em uma sala segura aqui voce deve se equipar e se preparar para explorar! \n");
         centralizarTexto("Voce deve explorar as demais salas, procurando por itens e derrotando os inimigos\n");
-        centralizarTexto("porem cuidado, as salas so serao visiveis apos voce visita-las\n");
-        cout << "Sistema de Pontuacao: \n";
-        cout << "\n * Itens: 25 pontos\n";
-        cout << "\n * Derrotar Inimigos: 200 pontos\n";
-        cout << "\n * Abrir Portas Trancadas: 100 pontos\n";
-        cout << "\n * Descobrir novas Salas: 50 pontos\n";
-        cout << "\n * Derrotar O Chefe: 500 pontos\n";
-        cin >> a;
-        return jogo();
+        centralizarTexto("porem cuidado, as salas so serao visiveis apos voce visita-las\n\n");
+        cout << "Sistema de Pontuacao:                                                          "
+				"Itens: \n";
+        cout << "\n * Itens: 25 pontos.                                           "
+				"* Chave: e utilizada para abrir portas!\n";
+        cout << "\n * Derrotar Inimigos: 200 pontos.                              "
+				"* Pocao: Aperte E para usar, Cure 3 de vida\n";
+        cout << "\n * Abrir Portas Trancadas: 100 pontos.                         "
+				"* outro: \n";
+        cout << "\n * Descobrir novas Salas: 50 pontos."
+				"\n";
+        cout << "\n * Derrotar O Chefe: 500 pontos.\n";
+        cout << "\n * Ao terminar, cada vida sobrando te da 100 pontos.\n\n\n\n";
+        system("pause");
+    
+        system("cls");
+        return main();
     }
     else { // Exit game
+        cout << "\n\n\n\n\n\n\n\n\n\n";
         centralizarTexto("Jogo Finalizado, Ate a proxima!");
+        cout << "\n\n\n\n\n\n\nn\n\n\n";
         return 0;
     }
 }
