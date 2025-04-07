@@ -41,6 +41,8 @@ int mapa[30][60] = {
 {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1}
 };
 
+int mapaEscuro[30][60] = {0};
+
 struct Jogador {
     int x = 5, y = 1;
     int vida = 10;
@@ -56,9 +58,6 @@ struct Inimigo {
     int acao = 0;
 };
 
-void esperarSegundo() {
-    std::this_thread::sleep_for(std::chrono::milliseconds(750));
-}
 
 void corTexto(int cor) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
@@ -74,7 +73,7 @@ void centralizarTexto(const string& text) {
     int padding = (consoleWidth - static_cast<int>(text.length())) / 2;
     if (padding < 0) padding = 0; // Evita valores negativos
 
-    // Imprime os necessários pra centralizar
+    // Imprime os necessï¿½rios pra centralizar
     cout << string(padding, ' ') << text << endl;
 }
 
@@ -116,7 +115,7 @@ void moverInimigo(Inimigo& inimigo) {
         break;
     }
 
-    // Atualiza a posição do inimigo
+    // Atualiza a posiï¿½ï¿½o do inimigo
     inimigo.x = novaX;
     inimigo.y = novaY;
 }
@@ -133,7 +132,7 @@ void batalha(Jogador& jogador, Inimigo& inimigo) {
         cout << "3. Tesoura\n";
         char escolha;
         cin >> escolha;
-        
+
          // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
         // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
         inimigo.acao = rand() % 3;
@@ -145,7 +144,7 @@ void batalha(Jogador& jogador, Inimigo& inimigo) {
         		else if (inimigo.acao == 1) {
 		            cout << "\nPedra X Papel, Voce tomou Dano!\n";
                     jogador.vida-=2;
-	            } 
+	            }
 	            else if (inimigo.acao == 2){
 	                cout << "\nPedra X Tesoura, Voce causou Dano""\n";
                     inimigo.vida-=2;
@@ -157,7 +156,7 @@ void batalha(Jogador& jogador, Inimigo& inimigo) {
 	            }
         		else if (inimigo.acao == 1) {
 		            cout << "\nPapel X Papel, nada aconteceu\n";
-	            } 
+	            }
 	            else if (inimigo.acao == 2){
 	                cout << "\nPapel X Tesoura, Voce tomou dano!\n";
 	            	jogador.vida-=2;
@@ -171,33 +170,31 @@ void batalha(Jogador& jogador, Inimigo& inimigo) {
         		else if (inimigo.acao == 1) {
 		            cout << "\nTesoura X Papel, voce causou dano!\n";
                     inimigo.vida-=2;
-	            } 
+	            }
 	            else if (inimigo.acao == 2){
 	                cout << "\nTesoura X Tesoura, nada aconteceu\n";
 	            }
-	        
+
         } else {
 	        cout << "\n escolha Invalida!";
-             
+
         }
         char usarPocao = 'n';
-        esperarSegundo();
-       
+
 
         if (inimigo.vida <= 0)
         {
 	        inimigo.x = -1, inimigo.y = -1;
             cout << "\nInimigo Derrotado!";
             jogador.pontuacao += 200;
-            esperarSegundo();
             system("cls");
-            
+
             break;
-            
+
         }
 
-        
-       
+
+
     }
 }
 
@@ -226,7 +223,7 @@ int jogo() {
     //Posicao inicial do personagem no console
     inimigo.x = 1, inimigo.y = 1;
 
-    long long tempoAnterior = GetTickCount64(); // Tempo anterior do movimento do inimigo
+    long long tempoAnterior = GetTickCount(); // Tempo anterior do movimento do inimigo
     long long tempoAtual;
     //Variavel para tecla pressionada
     char tecla;
@@ -240,17 +237,17 @@ int jogo() {
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 60; j++) {
                 if (i == jogador.x && j == jogador.y) {
-                    cout << char(190); //personagem 
+                    cout << char(190); //personagem
                 }
                 else if (i == inimigo.x && j == inimigo.y) {
                     cout << char(38); // inimigo
                 }
                 else {
-                    switch (mapa[i][j]) {
+                    switch (mapaEscuro[i][j]) {
                     case 0: cout << " "; break; //caminho
                     case 1: cout << char(219); break; //parede
                     case 2: cout << char(220); break; //parede horizontal
-                    case 3: cout << char(178); break; //Porta Fechada 
+                    case 3: cout << char(178); break; //Porta Fechada
                     case 4: cout << char(176); break; // Delimitador Salas
                     case 5: cout << char(95); break; // Caminho entre as salas
                     case 6: cout << char(117); break; // pocao
@@ -282,7 +279,7 @@ int jogo() {
             abrirPorta(jogador.chave, jogador.x, jogador.y);
         }
 
-        tempoAtual = GetTickCount64();
+        tempoAtual = GetTickCount();
 
         // Se se passou 1 segundo (1000 milissegundos), move o inimigo
         if (tempoAtual - tempoAnterior >= 500) {
@@ -296,6 +293,17 @@ int jogo() {
 
         ///executa os movimentos
         if (_kbhit()) { // SE _kbhit == true significa que o usuario apertou ALGUM BOTAO, depois o getch pega essa tecla para jogar pro switch abaixo
+            mapaEscuro[jogador.x][jogador.y] = mapa[jogador.x][jogador.y];
+            for(int i = -3; i < 3; i++){
+                if(mapa[jogador.x + i] != 0 && (jogador.x + i) >= 0){
+                    for(int j = -3; j < 3; j++){
+                        if((jogador.x + i) >= 0 && (jogador.y + j) >= 0){
+                            int valor = mapa[jogador.x + i][jogador.y + j];
+                            mapaEscuro[jogador.x + i][jogador.y + j] = (valor < 0) ? 0 : valor; // Evita valores negativos
+                        }
+                    }
+                }
+            }
             tecla = _getch(); // pega o que o usuario esta escrevendo e baseado nesse valor executa o switch abaixo
             switch (tecla) {
             case 72: case 'w': ///cima
@@ -334,8 +342,8 @@ int jogo() {
                 break;
             }
         }
-       
-    } //fim do laço do jogo
+
+    } //fim do laï¿½o do jogo
 
     return 0;
 }
@@ -353,7 +361,7 @@ int main() {
     centralizarTexto("3- Sair do Jogo\n");
     corTexto(7);
     cin >> opcao;
-    system("cls"); // limpa o console após a opção ser escolhida
+    system("cls"); // limpa o console apï¿½s a opï¿½ï¿½o ser escolhida
 
     if (opcao == 1) { // Start Game
         jogo();
@@ -378,7 +386,7 @@ int main() {
         cout << "\n * Derrotar O Chefe: 500 pontos.\n";
         cout << "\n * Ao terminar, cada vida sobrando te da 100 pontos.\n\n\n\n";
         system("pause");
-    
+
         system("cls");
         return main();
     }
