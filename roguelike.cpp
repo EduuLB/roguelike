@@ -4,11 +4,10 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <thread>
-#include <chrono>
 using namespace std;
 
 int mapaEscuro[30][60] =  {0};
+
 int mapa[30][60] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
 {1, 0, 0, 0, 0, 0, 8, 1, 0, 0, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 4, 4, 1, 0, 0, 0, 1, 0, 0, 0, 7, 1},
@@ -41,6 +40,40 @@ int mapa[30][60] = {
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}
 };
+
+int backupItens[30][60] = {
+{1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+{1, 0, 0, 0, 0, 0, 8, 1, 0, 0, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 4, 4, 1, 0, 0, 0, 1, 0, 0, 0, 7, 1},
+{1, 7, 0, 0, 1, 1, 1, 1, 4, 4, 5, 5, 5, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 5, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+{1, 0, 0, 1, 1, 0, 0, 3, 5, 5, 5, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 1, 0, 1, 0, 0, 1, 0, 0, 6, 1},
+{1, 1, 0, 0, 1, 0, 0, 1, 4, 4, 4, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+{1, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0, 4, 5, 5, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 4, 1, 7, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+{1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0},
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 0, 0, 0},
+{0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 5, 4, 0, 0, 0},
+{0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
+{0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
+{0, 4, 4, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 5, 1, 1, 1, 0},
+{4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 7, 1},
+{4, 5, 4, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 7, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1},
+{4, 5, 4, 0, 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1, 1, 0},
+{4, 5, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+{4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+{4, 5, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+{0, 4, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+{0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+{0, 0, 4, 4, 5, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 1, 1, 1, 0, 1, 1, 1, 4, 5, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 6, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
+{1, 0, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 1, 4, 5, 4, 4, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 6, 1, 0, 0, 0, 1, 1, 4, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 5, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}
+};
+
 struct Jogador {
     int x = 5, y = 1;
     int vida = 10;
@@ -56,7 +89,6 @@ struct Inimigo {
     int acao = 0;
     int dano = 2;
 };
-
 
 void corTexto(int cor) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
@@ -109,205 +141,145 @@ void abrirPorta(int& chave, int x, int y)
     }
 }
 
-void moverInimigo(Inimigo& inimigo) {
+void moverInimigo(Inimigo inimigos[7]) {
     int direcao = rand() % 4; // 0: cima, 1: baixo, 2: esquerda, 3: direita
-    int novaX = inimigo.x, novaY = inimigo.y;
 
+    for (int indexInimigo = 0; indexInimigo <= 6; indexInimigo++)
     switch (direcao) {
     case 0: // cima
-        if (mapa[inimigo.x - 1][inimigo.y] == 0)
-            novaX--;
+        if (mapa[inimigos[indexInimigo].x - 1][inimigos[indexInimigo].y] == 0)
+            inimigos[indexInimigo].x--;
         break;
     case 1: // baixo
-        if (mapa[inimigo.x + 1][inimigo.y] == 0)
-            novaX++;
+        if (mapa[inimigos[indexInimigo].x + 1][inimigos[indexInimigo].y] == 0)
+            inimigos[indexInimigo].x++;
         break;
     case 2: // esquerda
-        if (mapa[inimigo.x][inimigo.y - 1] == 0)
-            novaY--;
+        if (mapa[inimigos[indexInimigo].x][inimigos[indexInimigo].y - 1] == 0)
+            inimigos[indexInimigo].y--;
         break;
     case 3: // direita
-        if (mapa[inimigo.x][inimigo.y + 1] == 0)
-            novaY++;
+        if (mapa[inimigos[indexInimigo].x][inimigos[indexInimigo].y + 1] == 0)
+            inimigos[indexInimigo].y++;
         break;
     }
 
-    // Atualiza a posi  o do inimigo
-    inimigo.x = novaX;
-    inimigo.y = novaY;
 }
 
-void batalha(Jogador& jogador, Inimigo& inimigo) {
+int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo) {
+
     while (jogador.vida > 0) {
-        system("cls");
-        cout << "\n\nVidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave << "\n";
-        cout << "\n\n";
-        centralizarTexto("Voce encontrou um inimigo! ");
-        cout << "\nEscolha uma acao:\n";
-        cout << "1. Pedra\n";
-        cout << "2. Papel\n";
-        cout << "3. Tesoura\n";
-        char escolha;
-        cin >> escolha;
-
-
-        // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
-       // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
-        inimigo.acao = rand() % 3;
-        if (escolha == '1') { // Pedra
-            if (inimigo.acao == 0) {
-                cout << "\nPedra X Pedra, nada aconteceu\n";
-
-            }
-            else if (inimigo.acao == 1) {
-                cout << "\nPedra X Papel, Voce tomou Dano!\n";
-                jogador.vida -= inimigo.dano;
-            }
-            else if (inimigo.acao == 2) {
-                cout << "\nPedra X Tesoura, Voce causou Dano""\n";
-                inimigo.vida -= jogador.dano;
-            }
-        }
-        else if (escolha == '2') { // Papel
-            if (inimigo.acao == 0) {
-                cout << "\nPapel X Pedra, Voce causou Dano\n";
-                inimigo.vida -= jogador.dano;
-            }
-            else if (inimigo.acao == 1) {
-                cout << "\nPapel X Papel, nada aconteceu\n";
-            }
-            else if (inimigo.acao == 2) {
-                cout << "\nPapel X Tesoura, Voce tomou dano!\n";
-                jogador.vida -= inimigo.dano;
-            }
-
-        }
-        else if (escolha == '3') { // Tesoura
-            if (inimigo.acao == 0) {
-                cout << "\nTesoura X Pedra, voce tomou dano!\n";
-                jogador.vida -= inimigo.dano;
-            }
-            else if (inimigo.acao == 1) {
-                cout << "\nTesoura X Papel, voce causou dano!\n";
-                inimigo.vida -= jogador.dano;
-            }
-            else if (inimigo.acao == 2) {
-                cout << "\nTesoura X Tesoura, nada aconteceu\n";
-            }
-
-        }
-        else {
-            cout << "\n escolha Invalida!";
-
-        }
-        system("pause");
-        char usarPocao = 'n';
-
-
-        if (inimigo.vida <= 0)
-        {
-            inimigo.x = -1, inimigo.y = -1;
-            cout << "\nInimigo Derrotado!";
-            jogador.pontuacao += 200;
             system("cls");
+            cout << "\n\nVidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave << " \n\nVida Do Inimigo: " << inimigos[indexInimigo].vida << " \n";
+            cout << "\n\n";
+            if (indexInimigo == 7) {
+                centralizarTexto("Voce encontrou O Chefe! Se prepare, (e reze!) ");
+            } else {
+            	centralizarTexto("Voce encontrou um inimigo! ");
+            }
+            
+            cout << "\nEscolha uma acao:\n";
+            cout << "1. Pedra\n";
+            cout << "2. Papel\n";
+            cout << "3. Tesoura\n";
+            char escolha;
+            cin >> escolha;
 
-            break;
+
+            // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
+           // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
+            inimigos[indexInimigo].acao = rand() % 3;
+            if (escolha == '1') { // Pedra
+                if (inimigos[indexInimigo].acao == 0) {
+                    cout << "\nPedra X Pedra, nada aconteceu\n";
+
+                }
+                else if (inimigos[indexInimigo].acao == 1) {
+                    cout << "\nPedra X Papel, Voce tomou Dano!\n";
+                    jogador.vida -= inimigos[indexInimigo].dano;
+                }
+                else if (inimigos[indexInimigo].acao == 2) {
+                    cout << "\nPedra X Tesoura, Voce causou Dano""\n";
+                    inimigos[indexInimigo].vida -= jogador.dano;
+                }
+            }
+            else if (escolha == '2') { // Papel
+                if (inimigos[indexInimigo].acao == 0) {
+                    cout << "\nPapel X Pedra, Voce causou Dano\n";
+                    inimigos[indexInimigo].vida -= jogador.dano;
+                }
+                else if (inimigos[indexInimigo].acao == 1) {
+                    cout << "\nPapel X Papel, nada aconteceu\n";
+                }
+                else if (inimigos[indexInimigo].acao == 2) {
+                    cout << "\nPapel X Tesoura, Voce tomou dano!\n";
+                    jogador.vida -= inimigos[indexInimigo].dano;
+                }
+
+            }
+            else if (escolha == '3') { // Tesoura
+                if (inimigos[indexInimigo].acao == 0) {
+                    cout << "\nTesoura X Pedra, voce tomou dano!\n";
+                    jogador.vida -= inimigos[indexInimigo].dano;
+                }
+                else if (inimigos[indexInimigo].acao == 1) {
+                    cout << "\nTesoura X Papel, voce causou dano!\n";
+                    inimigos[indexInimigo].vida -= jogador.dano;
+                }
+                else if (inimigos[indexInimigo].acao == 2) {
+                    cout << "\nTesoura X Tesoura, nada aconteceu\n";
+                }
+
+            }
+            else {
+                cout << "\n escolha Invalida!";
+
+            }
+            system("pause");
+            char usarPocao = 'n';
+
+
+            if (inimigos[indexInimigo].vida <= 0 && indexInimigo == 7){
+                
+	            jogador.pontuacao += (jogador.vida * 150);
+	            jogador.pontuacao += 1000;
+	            system("cls");
+	            venceu(jogador);
+	            break;
+
+            } if (inimigos[indexInimigo].vida <= 0 && indexInimigo < 7) {
+                
+                cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
+                jogador.pontuacao += 200;
+                system("pause");
+                system("cls");
+            	return -1;
+            }
+
+				
+
 
         }
-
-
-
-    }
-}
-
-void batalhaBoss(Jogador& jogador, Inimigo& boss) {
-    while (jogador.vida > 0) {
-        system("cls");
-        cout << "\n\nVidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave << "\n";
-        cout << "\n\n";
-        centralizarTexto("Voce encontrou O Chefe! Se prepare, (e reze!) ");
-        cout << "\nEscolha uma acao:\n";
-        cout << "1. Pedra\n";
-        cout << "2. Papel\n";
-        cout << "3. Tesoura\n";
-        char escolha;
-        cin >> escolha;
-
-
-        // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
-       // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
-        boss.acao = rand() % 3;
-        if (escolha == '1') { // Pedra
-            if (boss.acao == 0) {
-                cout << "\nPedra X Pedra, nada aconteceu\n";
-
-            }
-            else if (boss.acao == 1) {
-                cout << "\nPedra X Papel, Voce tomou Dano!\n";
-                jogador.vida -= boss.dano;
-            }
-            else if (boss.acao == 2) {
-                cout << "\nPedra X Tesoura, Voce causou Dano""\n";
-                boss.vida -= jogador.dano;
-            }
-        }
-        else if (escolha == '2') { // Papel
-            if (boss.acao == 0) {
-                cout << "\nPapel X Pedra, Voce causou Dano\n";
-                boss.vida -= jogador.dano;
-            }
-            else if (boss.acao == 1) {
-                cout << "\nPapel X Papel, nada aconteceu\n";
-            }
-            else if (boss.acao == 2) {
-                cout << "\nPapel X Tesoura, Voce tomou dano!\n";
-                jogador.vida -= boss.dano;
-            }
-
-        }
-        else if (escolha == '3') { // Tesoura
-            if (boss.acao == 0) {
-                cout << "\nTesoura X Pedra, voce tomou dano!\n";
-                jogador.vida -= boss.dano;
-            }
-            else if (boss.acao == 1) {
-                cout << "\nTesoura X Papel, voce causou dano!\n";
-                boss.vida -= jogador.dano;
-            }
-            else if (boss.acao == 2) {
-                cout << "\nTesoura X Tesoura, nada aconteceu\n";
-            }
-
-        }
-        else {
-            cout << "\n escolha Invalida!";
-
-        }
-        system("pause");
-
-
-
-        if (boss.vida <= 0)
-        {
-            jogador.pontuacao += 1000;
-            system("cls");
-
-            // jogador.pontuacao += jogador.vida * 50;
-            venceu(jogador);
-            break;
-        }
-
-
-
-    }
+    
+    
 }
 
 int jogo() {
     srand(static_cast<unsigned int>(time(0)));
     Jogador jogador;
-    Inimigo inimigo = { 5, 1, 1, 1, 2};
-    Inimigo inimigo2 = { 5, 4, 3, 1, 2};
-    Inimigo boss = {2, 0, 0, 1, 1};
+    Inimigo inimigos[8] = {
+        { 2, 1, 1, 1, 2}, // inimigo[0]
+        { 5, 2, 16, 1, 2}, // inimigo[1]
+        { 5, 8, 39, 1, 2}, // inimigo[2]
+        { 2, 15, 13, 1, 2}, // inimigo[3]
+	    { 2, 11, 10, 1, 2}, // inimigo[4]
+	    { 2, 20, 19, 1, 2}, // inimigo[5]
+	    { 2, 28, 28, 1, 2}, // inimigo[6]
+        {10, 0, 0, 2, 3} // boss[7]
+
+
+    };
+    // Inimigo boss = {10, 0, 0, 2, 3};
 
     ///ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
@@ -342,18 +314,31 @@ int jogo() {
             for (int j = 0; j < 60; j++) {
                 if (i == jogador.x && j == jogador.y) {
                     cout << char(190); // personagem
-                } else if (
-                    i == inimigo.x &&
-                    j == inimigo.y ||
-                    i == inimigo2.x &&
-                    j == inimigo2.y
-                ) {
+                }
+                else if (
+                    i == inimigos[0].x &&
+                    j == inimigos[0].y ||
+                    i == inimigos[1].x &&
+                    j == inimigos[1].y ||
+                    i == inimigos[2].x &&
+                    j == inimigos[2].y ||
+                    i == inimigos[3].x &&
+                    j == inimigos[3].y ||
+                    i == inimigos[4].x &&
+                    j == inimigos[4].y ||
+                    i == inimigos[5].x &&
+                    j == inimigos[5].y ||
+                    i == inimigos[6].x &&
+                    j == inimigos[6].y
+
+                    ) {
                     bool inimigoImpresso = false; // Variável de controle
+
 
                     for (int di = -3; di <= 3 && !inimigoImpresso; di++) {
                         for (int dj = -3; dj <= 3; dj++) {
-                            int posX = inimigo.x + di;
-                            int posY = inimigo.y + dj;
+                            int posX = inimigos[0].x + di;
+                            int posY = inimigos[0].y + dj;
 
                             // Verifica se as coordenadas estão dentro do mapa
                             if (posX >= 0 && posY >= 0 && mapa[posX] != 0) {
@@ -375,6 +360,7 @@ int jogo() {
                     if (!inimigoImpresso) {
                         cout << " "; // Imprime espaço vazio caso o inimigo não esteja no raio
                     }
+                
                 } else {
                     // Garantir que sempre seja impresso algo no mapa
                     switch (mapaEscuro[i][j]) {
@@ -396,18 +382,25 @@ int jogo() {
             }
             cout << "\n";
         } //fim for mapa
-        cout << "\n Vidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave;
+        cout << "\n Vidas: ";
+    	cout << jogador.vida;
+    	cout << "  ||  Pontuacao: ";
+    	cout << jogador.pontuacao;
+    	cout <<  "  || Usos da Pocao: ";
+    	cout << jogador.pocao;
+    	cout << "  || Chave: " ;
+    	cout << jogador.chave;
 
-        if (mapa[jogador.x][jogador.y] == 6) { // jogador pegar pocao
+        if (mapa[jogador.x][jogador.y] == 6) { // pocao
             jogador.pocao += 3;
             jogador.pontuacao += 50;
             mapa[jogador.x][jogador.y] = 0;
         }
-        if (mapa[jogador.x][jogador.y] == 7) { // jogador chegar em uma armadilha
+        if (mapa[jogador.x][jogador.y] == 7) { // armadilha
             jogador.vida -= 5;
             mapa[jogador.x][jogador.y] = 0;
         }
-        if (mapa[jogador.x][jogador.y] == 8) { // jogador pegar uma chave
+        if (mapa[jogador.x][jogador.y] == 8) { // chave
             jogador.chave = true;
             mapa[jogador.x][jogador.y] = 0;
             jogador.pontuacao += 50;
@@ -416,15 +409,14 @@ int jogo() {
         { // jogador chegar perto de uma porta
             abrirPorta(jogador.chave, jogador.x, jogador.y);
         }
-        if (mapa[jogador.x][jogador.y] == 9)
+        if (mapa[jogador.x][jogador.y] == 9) // item aumentar dano
         {
 	        jogador.dano += 3;
             mapa[jogador.x][jogador.y] = 0;
             jogador.pontuacao += 50;
         }
-        if (mapa[jogador.x][jogador.y] == 10)
+        if (mapa[jogador.x][jogador.y] == 10) // item mapa
         {
-
             for (int linha = 0; linha < 30; linha ++) {
 	            for (int coluna = 0; coluna < 60; coluna++) {
 		            mapaEscuro[linha][coluna] = mapa[linha][coluna];
@@ -433,9 +425,9 @@ int jogo() {
         	mapa[jogador.x][jogador.y] = 0;
 
         }
-        if (mapa[jogador.x + 1][jogador.y] == 11 || mapa[jogador.x - 1][jogador.y] == 11 || mapa[jogador.x][jogador.y + 1] == 11 || mapa[jogador.x][jogador.y - 1] == 11)
-        {
-	        batalhaBoss(jogador, boss);
+        if (mapa[jogador.x + 1][jogador.y] == 11 || mapa[jogador.x - 1][jogador.y] == 11 || mapa[jogador.x][jogador.y + 1] == 11 || mapa[jogador.x][jogador.y - 1] == 11) 
+        { 
+	      batalha(jogador, inimigos, 7);
         }
 
 
@@ -443,12 +435,17 @@ int jogo() {
 
         // Se passou meio segundo ou millissegundos), move o inimigo
         if (tempoAtual - tempoAnterior >= 500) {
-            moverInimigo(inimigo);
+            moverInimigo(inimigos);
             tempoAnterior = tempoAtual; // Atualiza o tempo anterior para o tempo atual
         }
 
-        if (jogador.x == inimigo.x && jogador.y == inimigo.y) { // jogador encontra um inimigo
-            batalha(jogador, inimigo);
+        for (int controle = 0; controle < 7; controle++)
+        {
+
+            if (jogador.x == inimigos[controle].x && jogador.y == inimigos[controle].y) { // jogador encontra um inimigo
+                inimigos[controle].x = batalha(jogador, inimigos, controle);
+                inimigos[controle].y = inimigos[controle].x;
+            }
         }
 
         ///executa os movimentos
@@ -496,6 +493,12 @@ int jogo() {
             cin >> escolha;
             if (escolha == 's' || escolha == 'S') {
                 system("cls");
+            	for (int linha = 0; linha < 30; linha ++) {
+	            for (int coluna = 0; coluna < 60; coluna++) {
+                    mapa[linha][coluna] = backupItens[linha][coluna];
+		            mapaEscuro[linha][coluna] = 0;
+	            }
+            }
                 return jogo();
             }
             else {
@@ -509,8 +512,8 @@ int jogo() {
 }
 
 int main() {
-    //HWND hwnd = GetConsoleWindow();
-    //ShowWindow(hwnd, SW_MAXIMIZE);
+    
+    
     int opcao = 0;
     cout << "\n\n\n\n\n\n\n\n\n";
     corTexto(3);
