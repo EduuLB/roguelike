@@ -14,13 +14,13 @@ int mapa[30][60] =
     {1, 0, 0, 0, 0, 0, 8, 1, 0, 0, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 4, 4, 1, 0, 0, 0, 1, 0, 0, 0, 7, 1},
     {1, 7, 0, 0, 1, 1, 1, 1, 4, 4, 5, 5, 5, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 5, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
     {1, 0, 0, 1, 1, 0, 0, 3, 5, 5, 5, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 1, 0, 1, 0, 0, 1, 0, 0, 6, 1},
-    {1, 1, 0, 0, 1, 0, 0, 1, 4, 4, 4, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+    {1, 1, 0, 0, 1, 0, 0, 1, 4, 4, 4, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
     {1, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0, 4, 5, 5, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 4, 1, 7, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 5, 4, 0, 0, 0},
-    {0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
+    {0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
     {0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
     {0, 4, 4, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 5, 1, 1, 1, 0},
     {4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 7, 1},
@@ -29,32 +29,32 @@ int mapa[30][60] =
     {4, 5, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
     {4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {4, 5, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-    {0, 4, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 4, 4, 5, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 0, 1, 1, 1, 4, 5, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 6, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
+    {0, 4, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+    {0, 0, 4, 4, 5, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 1, 7, 0, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 0, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 0, 1, 1, 1, 4, 5, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 6, 0, 1, 0, 1, 6, 1, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
     {1, 0, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 1, 4, 5, 4, 4, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 6, 1, 0, 0, 0, 1, 1, 4, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 5, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 1, 4, 5, 4, 4, 1, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 6, 1, 0, 0, 0, 1, 1, 4, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 5, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 7, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 1, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}
 };
 
 int backupItens[30][60] =
 {
-    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 1, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
     {1, 0, 0, 0, 0, 0, 8, 1, 0, 0, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0, 4, 4, 1, 0, 0, 0, 1, 0, 0, 0, 7, 1},
     {1, 7, 0, 0, 1, 1, 1, 1, 4, 4, 5, 5, 5, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 5, 4, 4, 4, 4, 5, 5, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
     {1, 0, 0, 1, 1, 0, 0, 3, 5, 5, 5, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 1, 0, 1, 0, 0, 1, 0, 0, 6, 1},
-    {1, 1, 0, 0, 1, 0, 0, 1, 4, 4, 4, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+    {1, 1, 0, 0, 1, 0, 0, 1, 4, 4, 4, 4, 5, 4, 1, 0, 0, 0, 0, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
     {1, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0, 4, 5, 5, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 4, 1, 7, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 7, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 5, 4, 0, 0, 0},
-    {0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
+    {0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
     {0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 4, 0, 0, 0},
     {0, 4, 4, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 5, 1, 1, 1, 0},
     {4, 5, 5, 5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 7, 1},
@@ -63,16 +63,16 @@ int backupItens[30][60] =
     {4, 5, 4, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
     {4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {4, 5, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-    {0, 4, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 4, 4, 5, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 0, 1, 1, 1, 4, 5, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 6, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
+    {0, 4, 5, 4, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+    {0, 0, 4, 4, 5, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 0, 1, 7, 0, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 0, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 0, 1, 1, 1, 4, 5, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 6, 0, 1, 0, 1, 6, 1, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
     {1, 0, 0, 1, 0, 1, 0, 1, 4, 5, 4, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 4, 5, 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 1, 4, 5, 4, 4, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 6, 1, 0, 0, 0, 1, 1, 4, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 5, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 1, 4, 5, 4, 4, 1, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 5, 4, 4, 1, 1, 1, 1, 1, 1, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 6, 1, 0, 0, 0, 1, 1, 4, 5, 5, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 5, 5, 5, 5, 5, 5, 5, 4, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 4, 4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 7, 0, 0, 1, 7, 0, 0, 0, 0, 0, 0, 1, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}
 };
 
@@ -82,13 +82,13 @@ struct Jogador
     int vida = 10;
     int pontuacao = 0;
     int pocao = 0;
-    int chave = 5;
+    int chave = 0;
     int dano = 2;
 };
 
 struct Inimigo
 {
-    int vida = 0;
+    int vida = 5;
     int x = 0, y = 0;
     int acao = 0;
     int dano = 2;
@@ -117,13 +117,13 @@ void centralizarTexto(const string& text)
 int venceu(Jogador jogador)
 {
     cout << "\n\n\n";
-    cout << R"(
-					    __   _    __      _    __  __ _   _ ___
-					   |  _ \ / \  |  _ \    / \  | _ )| __| \ | / __|
-					   | |) / _ \ | |) |  / _ \ |  _ \|  | |  \| \__ \
-					   |  _/ __ \|  _ <  / _ \| |) | |_| |\  |__) |
-					   || //   \\| \\//   \\_/|__|| \|_/
-    )" << endl;
+        cout << R"(
+  ____   _    ____      _    ____  _____ _   _ ____    _  
+ |  _ \ / \  |  _ \    / \  | __ )| ____| \ | / ___|  | | 
+ | |_) / _ \ | |_) |  / _ \ |  _ \|  _| |  \| \___ \  | | 
+ |  __/ ___ \|  _ <  / ___ \| |_) | |___| |\  |___) | |_| 
+ |_| /_/   \_\_| \_\/_/   \_\____/|_____|_| \_|____/  (_) 
+)" << endl;
     cout << "\n\n Voce derrotou o boss Univalison!! \n";
     cout << "\n A sua Pontuacao Final foi de: ";
     corTexto(4);
@@ -151,7 +151,6 @@ void abrirPorta(int& chave, int x, int y)
 void moverInimigo(Inimigo inimigos[7])
 {
     int direcao = rand() % 4; // 0: cima, 1: baixo, 2: esquerda, 3: direita
-
     for (int indexInimigo = 0; indexInimigo <= 6; indexInimigo++)
         switch (direcao)
         {
@@ -183,13 +182,13 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
         system("cls");
         cout << "\n\nVidas: " << jogador.vida << "  ||  Pontuacao: " << jogador.pontuacao << " || Usos da Pocao: " << jogador.pocao << " || Chave: " << jogador.chave << " \n\nVida Do Inimigo: " << inimigos[indexInimigo].vida << " \n";
         cout << "\n\n";
-        if (indexInimigo == 7)
+        if (indexInimigo == 7) // index do boss
         {
-            centralizarTexto("Voce encontrou O Chefe! Se prepare, (e reze!) ");
+            centralizarTexto("Voce encontrou O Chefe! Se prepare");
         }
         else
         {
-            centralizarTexto("Voce encontrou um inimigo! ");
+            centralizarTexto("Voce encontrou um inimigo!");
         }
 
         cout << "\nEscolha uma acao:\n";
@@ -199,9 +198,6 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
         char escolha;
         cin >> escolha;
 
-
-        // -------------------------------> For Reproduzindo Toda A matriz pra conseguir limpar a tela a cada ataque, mas mantendo o mapa aparecendo,
-        // ----------------------------------> depois tentar de outro jeito por que assim o mapa aparece e volta dando um flick
         inimigos[indexInimigo].acao = rand() % 3;
         if (escolha == '1')   // Pedra
         {
@@ -263,8 +259,6 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
 
         }
         system("pause");
-        char usarPocao = 'n';
-
 
         if (inimigos[indexInimigo].vida <= 0 && indexInimigo == 7)
         {
@@ -296,22 +290,21 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
 
 int jogo()
 {
-    srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de n√∫meros aleat√≥rios
+    srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de n˙meros aleatÛrios
     Jogador jogador;
     Inimigo inimigos[8] =
     {
-        { 2, 1, 1, 1, 2}, // inimigo[0]
-        { 5, 2, 16, 1, 2}, // inimigo[1]
+        { 4, 1, 1, 1, 2}, // inimigo[0]
+        { 4, 2, 16, 1, 2}, // inimigo[1]
         { 5, 8, 39, 1, 2}, // inimigo[2]
-        { 2, 15, 13, 1, 2}, // inimigo[3]
-        { 2, 11, 10, 1, 2}, // inimigo[4]
-        { 2, 20, 19, 1, 2}, // inimigo[5]
-        { 2, 28, 28, 1, 2}, // inimigo[6]
-        {10, 0, 0, 2, 3} // boss[7]
+        { 5, 15, 13, 1, 2}, // inimigo[3]
+        { 6, 11, 10, 1, 2}, // inimigo[4]
+        { 8, 20, 19, 1, 2}, // inimigo[5]
+        { 6, 28, 28, 1, 2}, // inimigo[6]
+        {25, 0, 0, 2, 3} // boss[7]
 
 
     };
-    // Inimigo boss = {10, 0, 0, 2, 3};
 
     //ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
@@ -337,7 +330,7 @@ int jogo()
     char tecla;
 
 
-    while (true) // Loop principal do jogo, roda continuamente at√© o jogador morrer ou escolher sair
+    while (true) // Loop principal do jogo, roda continuamente atÈ o jogador morrer ou escolher sair
     {
         //Posiciona o cursor no canto superior esquerdo do console
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
@@ -347,13 +340,13 @@ int jogo()
         {
             for (int j = 0; j < 60; j++) // Loop pelas colunas do mapa (largura)
             {
-                // Se a posi√ß√£o atual for a mesma do jogador, imprime o personagem
+                // Se a posiÁ„o atual for a mesma do jogador, imprime o personagem
                 if (i == jogador.x && j == jogador.y)
                 {
                     cout << char(190); // Personagem do jogador
                 }
 
-                // Se a posi√ß√£o atual for de um dos inimigos
+                // Se a posiÁ„o atual for de um dos inimigos
                 else if (
                     i == inimigos[0].x && j == inimigos[0].y ||
                     i == inimigos[1].x && j == inimigos[1].y ||
@@ -370,7 +363,7 @@ int jogo()
                     {
                         if (i == inimigos[idx].x && j == inimigos[idx].y)
                         {
-                            // Verifica se o jogador est√° no raio de 3 unidades em rela√ß√£o ao inimigo
+                            // Verifica se o jogador est· no raio de 3 unidades em relaÁ„o ao inimigo
                             for (int di = -3; di <= 3 && !inimigoImpresso; di++)
                             {
                                 for (int dj = -3; dj <= 3 && !inimigoImpresso; dj++)
@@ -378,16 +371,16 @@ int jogo()
                                     int posX = inimigos[idx].x + di;
                                     int posY = inimigos[idx].y + dj;
 
-                                    // Verifica se a posi√ß√£o √© v√°lida dentro do mapa
+                                    // Verifica se a posiÁ„o È v·lida dentro do mapa
                                     if (posX >= 0 && posY >= 0 && mapa[posX] != 0)
                                     {
-                                        // C√°lculo de dist√¢ncia de Manhattan entre jogador e inimigo
+                                        // C·lculo de dist‚ncia de Manhattan entre jogador e inimigo
                                         int distanciaX = abs(jogador.x - posX);
                                         int distanciaY = abs(jogador.y - posY);
 
                                         if (distanciaX + distanciaY <= 3)
                                         {
-                                            cout << char(38); // Imprime o inimigo vis√≠vel
+                                            cout << char(38); // Imprime o inimigo visÌvel
                                             inimigoImpresso = true;
                                         }
                                     }
@@ -396,7 +389,7 @@ int jogo()
 
                             if (!inimigoImpresso)
                             {
-                                cout << " "; // Inimigo est√° fora do alcance de vis√£o do jogador
+                                cout << " "; // Inimigo est· fora do alcance de vis„o do jogador
                             }
 
                             break; // Sai do loop do inimigo atual
@@ -404,32 +397,32 @@ int jogo()
                     }
                 }
 
-                // Caso contr√°rio, imprime o elemento do mapa
+                // Caso contr·rio, imprime o elemento do mapa
                 else
                 {
-                    switch (mapaEscuro[i][j]) // mapaEscuro representa o que o jogador j√° enxergou
+                    switch (mapaEscuro[i][j]) // mapaEscuro representa o que o jogador j· enxergou
                     {
                     case 0:
                         cout << " ";
-                        break;// Caminho vazio
+                        break; // Caminho vazio
                     case 1:
                         cout << char(219);
-                        break;       // Parede
+                        break; // Parede
                     case 2:
                         cout << " ";
-                        break;// Espa√ßo n√£o especificado
+                        break;// EspaÁo n„o especificado
                     case 3:
                         cout << char(178);
                         break;// Porta fechada
                     case 4:
                         cout << " ";
-                        break;// Espa√ßo bloqueado
+                        break;// EspaÁo bloqueado
                     case 5:
                         cout << char(176);
                         break;// Corredor
                     case 6:
                         cout << char(117);
-                        break;// Po√ß√£o de cura
+                        break;// PoÁ„o de cura
                     case 7:
                         cout << char(88);
                         break;// Armadilha
@@ -451,16 +444,17 @@ int jogo()
             cout << "\n"; // Fim da linha do mapa
         }
 
-        // Exibi√ß√£o das informa√ß√µes do jogador
+        // ExibiÁ„o das informaÁıes do jogador
+        corTexto(3);
         cout << "\n Vidas: " << jogador.vida;
         cout << "  ||  Pontuacao: " << jogador.pontuacao;
         cout << "  || Usos da Pocao: " << jogador.pocao;
         cout << "  || Chave: " << jogador.chave;
-
-        // Verifica se o jogador est√° sobre algum item especial
-        if (mapa[jogador.x][jogador.y] == 6)   // Po√ß√£o
+        corTexto(7);
+        // Verifica se o jogador est· sobre algum item especial
+        if (mapa[jogador.x][jogador.y] == 6)   // PoÁ„o
         {
-            jogador.pocao += 3;
+            jogador.pocao += 1;
             jogador.pontuacao += 50;
             mapa[jogador.x][jogador.y] = 0;
         }
@@ -471,12 +465,12 @@ int jogo()
         }
         if (mapa[jogador.x][jogador.y] == 8)   // Chave
         {
-            jogador.chave = true;
+            jogador.chave += 1;
             jogador.pontuacao += 50;
             mapa[jogador.x][jogador.y] = 0;
         }
 
-        // Verifica se est√° pr√≥ximo a uma porta para tentar abrir
+        // Verifica se est· prÛximo a uma porta para tentar abrir
         if (mapa[jogador.x + 1][jogador.y] == 3 || mapa[jogador.x - 1][jogador.y] == 3 ||
                 mapa[jogador.x][jogador.y + 1] == 3 || mapa[jogador.x][jogador.y - 1] == 3)
         {
@@ -509,7 +503,7 @@ int jogo()
             batalha(jogador, inimigos, 7);
         }
 
-        // Verifica se √© hora de mover os inimigos
+        // Verifica se È hora de mover os inimigos
         tempoAtual = GetTickCount();
         if (tempoAtual - tempoAnterior >= 500) // A cada 500ms
         {
@@ -533,7 +527,7 @@ int jogo()
         {
             mapaEscuro[jogador.x][jogador.y] = mapa[jogador.x][jogador.y]; // Atualiza mapa explorado
 
-            // Atualiza √°rea de vis√£o do jogador em 3 unidades ao redor
+            // Atualiza ·rea de vis„o do jogador em 3 unidades ao redor
             for (int i = -3; i < 3; i++)
             {
                 if (mapa[jogador.x + i] != 0 && (jogador.x + i) >= 0)
@@ -568,7 +562,7 @@ int jogo()
             case 'd': // direita
                 if (mapa[jogador.x][jogador.y + 1] == 0 || mapa[jogador.x][jogador.y + 1] > 4) jogador.y++;
                 break;
-            case 'e': // usar po√ß√£o
+            case 'e': // usar poÁ„o
                 if (jogador.pocao >= 1)
                 {
                     jogador.vida += 3;
@@ -638,7 +632,7 @@ int main()
     else if (opcao == 2)   // Guia
     {
         char a = '0';
-
+        corTexto(3);
         centralizarTexto("GUIA E MANUAL \n");
         centralizarTexto("Voce nasce em uma sala segura aqui voce deve se equipar e se preparar para explorar! \n");
         centralizarTexto("Voce deve explorar as demais salas, procurando por itens e derrotando os inimigos\n");
@@ -646,11 +640,13 @@ int main()
         cout << "Sistema de Pontuacao:                                                          "
              "Itens: \n";
         cout << "\n * Itens: 50 pontos.                                           "
-             "* Chave: e utilizada para abrir portas!\n";
+             "* Chave: (" << char(170) << ") utilizada para abrir portas!\n";
         cout << "\n * Derrotar Inimigos: 200 pontos.                              "
-             "* Pocao: Aperte E para usar, Cure 3 de vida\n";
-        cout << "\n * Derrotar O Chefe: 1000 pontos.\n";
-        cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.\n\n\n\n";
+             "* Pocao: (u) Aperte E para usar, Cure 3 de vida\n";
+        cout << "\n * Derrotar O Chefe: 1000 pontos.                              "
+			 "* Mapa: (" << char(241) << ") Revela o restante do mapa\n"; 
+        cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
+    	     "* Arma: (©) Aumenta o Dano causado a inimigos \n\n\n\n\n"; 
         system("pause");
 
         system("cls");
