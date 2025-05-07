@@ -1,0 +1,17 @@
+#pragma once
+
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
+#include <chrono>
+#include <thread>
+#include "mapas.h"
+#include "Estruturas.h"
+#include "funcoesAux.h"
+#include "relogio.h"
+#include "Combate.h"
+#include "Movimento.h"
+#include "Game.h"

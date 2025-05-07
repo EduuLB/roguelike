@@ -9,7 +9,6 @@ struct Jogador
     int pocao = 0;
     int chave = 0;
     int dano = 2;
-    int exp = 0;
 };
 
 struct Inimigo

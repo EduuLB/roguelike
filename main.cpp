@@ -10,6 +10,10 @@
 #include "Estruturas.h"
 #include "funcoesAux.h"
 #include "relogio.h"
+#include "Combate.h"
+#include "Movimento.h"
+#include "Game.h"
+#include "Includes"
 using namespace std;
 
 int venceu(Jogador jogador)

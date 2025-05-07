@@ -69,7 +69,7 @@ int jogo()
                     i == inimigos[4].x && j == inimigos[4].y ||
                     i == inimigos[5].x && j == inimigos[5].y ||
                     i == inimigos[6].x && j == inimigos[6].y
-                    )
+                )
                 {
                     bool inimigoImpresso = false;
 
@@ -161,12 +161,17 @@ int jogo()
         // Exibição das informações do jogador
         corTexto(3);
 
+        auto agora = std::chrono::steady_clock::now();
+		auto diferenca = std::chrono::duration_cast<std::chrono::seconds>(agora - ultimoSegundo);
+        
         cout << "\n Vidas: " << jogador.vida;
         cout << "  ||  Pontuacao: " << jogador.pontuacao;
         cout << "  || Usos da Pocao: " << jogador.pocao;
         cout << "  || Chave: " << jogador.chave << "\n\n";
-        relogio();
 
+		relogio();
+    	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+      
         // cout << "Nivel: " << 2 << " ||   Level:";
         corTexto(7);
         // Verifica se o jogador está sobre algum item especial
@@ -190,7 +195,7 @@ int jogo()
 
         // Verifica se está próximo a uma porta para tentar abrir
         if (mapa[jogador.x + 1][jogador.y] == 3 || mapa[jogador.x - 1][jogador.y] == 3 ||
-            mapa[jogador.x][jogador.y + 1] == 3 || mapa[jogador.x][jogador.y - 1] == 3)
+                mapa[jogador.x][jogador.y + 1] == 3 || mapa[jogador.x][jogador.y - 1] == 3)
         {
             abrirPorta(jogador.chave, jogador.x, jogador.y);
         }
@@ -204,7 +209,7 @@ int jogo()
 
         if (mapa[jogador.x][jogador.y] == 10) // Item para revelar o mapa completo
         {
-            for (int linha = 0; linha < 30; linha++)
+            for (int linha = 0; linha < 30; linha ++)
             {
                 for (int coluna = 0; coluna < 60; coluna++)
                 {
@@ -216,18 +221,14 @@ int jogo()
 
         // Se estiver perto do boss, inicia batalha
         if (mapa[jogador.x + 1][jogador.y] == 11 || mapa[jogador.x - 1][jogador.y] == 11 ||
-            mapa[jogador.x][jogador.y + 1] == 11 || mapa[jogador.x][jogador.y - 1] == 11)
+                mapa[jogador.x][jogador.y + 1] == 11 || mapa[jogador.x][jogador.y - 1] == 11)
         {
             batalha(jogador, inimigos, 7);
         }
 
-        if (jogador.exp >= 10) {
-            subirNivel(jogador);
-        }
-
-        tempoAtual = GetTickCount64();
+    	tempoAtual = GetTickCount64();
         // Verifica se é hora de mover os inimigos
-
+        
         if (tempoAtual - tempoAnterior >= 500) // A cada 500ms
         {
             moverInimigo(inimigos);
@@ -305,14 +306,12 @@ int jogo()
 
             char escolha;
             cin >> escolha;
-            minutos = 0;
-            segundos = 0;
 
             if (escolha == 's' || escolha == 'S')
             {
                 // Reinicia jogo do zero
                 system("cls");
-                for (int linha = 0; linha < 30; linha++)
+                for (int linha = 0; linha < 30; linha ++)
                 {
                     for (int coluna = 0; coluna < 60; coluna++)
                     {
