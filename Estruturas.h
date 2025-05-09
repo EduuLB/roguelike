@@ -5,10 +5,15 @@ struct Jogador
 {
     int x = 5, y = 1;
     int vida = 10;
+    int vidaMaxima = 10;
     int pontuacao = 0;
     int pocao = 0;
     int chave = 0;
     int dano = 2;
+    int exp = 0;
+    int expNecessaria = 100;
+    int nivel = 1;
+    int critico = 20;
 };
 
 struct Inimigo

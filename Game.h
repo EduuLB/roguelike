@@ -1,5 +1,5 @@
 #pragma once
-
+#include "SubirNivel.h"
 int jogo()
 {
     srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de números aleatórios
@@ -11,7 +11,6 @@ int jogo()
         { 5, 8, 39, 1, 2}, // inimigo[2]
         { 5, 15, 13, 1, 2}, // inimigo[3]
         { 6, 11, 10, 1, 2}, // inimigo[4]
-        { 8, 20, 19, 1, 2}, // inimigo[5]
         { 6, 28, 28, 1, 2}, // inimigo[6]
         {25, 0, 0, 2, 3} // boss[7]
 
@@ -164,13 +163,16 @@ int jogo()
         auto agora = std::chrono::steady_clock::now();
 		auto diferenca = std::chrono::duration_cast<std::chrono::seconds>(agora - ultimoSegundo);
         
-        cout << "\n Vidas: " << jogador.vida;
-        cout << "  ||  Pontuacao: " << jogador.pontuacao;
-        cout << "  || Usos da Pocao: " << jogador.pocao;
-        cout << "  || Chave: " << jogador.chave << "\n\n";
-
+        cout << "\n Vida: " << jogador.vida << " / " << jogador.vidaMaxima;
+        cout << "  || Pontuacao: " << jogador.pontuacao;
+        cout << "  || pocoes: " << jogador.pocao;
+        cout << "  || Chaves: " << jogador.chave;
+    	cout << "  || Nivel: " << jogador.nivel;
+        cout << "  || Exp: " << jogador.exp << " / " << jogador.expNecessaria << "\n\n";
+        
 		relogio();
     	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
       
         // cout << "Nivel: " << 2 << " ||   Level:";
         corTexto(7);
@@ -234,6 +236,10 @@ int jogo()
             moverInimigo(inimigos);
             tempoAnterior = tempoAtual;
         }
+        // Verifica se o jogador subir de nivel
+        if (jogador.exp >= jogador.expNecessaria) {
+			subirNivel(jogador);
+        }
 
         // Verifica se o jogador colidiu com algum inimigo
         for (int controle = 0; controle < 7; controle++)
@@ -290,7 +296,9 @@ int jogo()
                 if (jogador.pocao >= 1)
                 {
                     jogador.vida += 3;
-                    jogador.pocao--;
+                	jogador.pocao--;
+                	if (jogador.vida >= jogador.vidaMaxima) jogador.pocao++;
+                    if (jogador.vida > jogador.vidaMaxima) jogador.vida = jogador.vidaMaxima;
                 }
                 break;
             }

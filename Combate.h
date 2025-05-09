@@ -41,14 +41,20 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
         cout << "2. Papel\n";
         cout << "3. Tesoura\n";
         char escolha;
+        bool isCritico = false;
+        int numAleatorio = rand() % 100;
+        if (numAleatorio <= jogador.critico) isCritico = true;
         cin >> escolha;
 
         inimigos[indexInimigo].acao = rand() % 3;
+        
         if (escolha == '1')   // Pedra
         {
             if (inimigos[indexInimigo].acao == 0)
             {
-                cout << "\nPedra X Pedra, nada aconteceu\n";
+                cout << "\nPedra X Pedra, Empate, voces se causaram dano\n";
+                jogador.vida -= inimigos[indexInimigo].dano / 2;
+                inimigos[indexInimigo].vida -= jogador.dano / 2;
 
             }
             else if (inimigos[indexInimigo].acao == 1)
@@ -58,7 +64,11 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             }
             else if (inimigos[indexInimigo].acao == 2)
             {
-                cout << "\nPedra X Tesoura, Voce causou Dano""\n";
+                cout << "\nPedra X Tesoura, Voce causou Dano";
+                if (isCritico) {
+                    inimigos[indexInimigo].vida -= jogador.dano / 2;
+                    cout << ", Critico!\n";
+                } else cout << "\n";
                 inimigos[indexInimigo].vida -= jogador.dano;
             }
         }
@@ -67,11 +77,17 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             if (inimigos[indexInimigo].acao == 0)
             {
                 cout << "\nPapel X Pedra, Voce causou Dano\n";
+                  if (isCritico) {
+                    inimigos[indexInimigo].vida -= jogador.dano / 2;
+                    cout << ", Critico!";
+                }
                 inimigos[indexInimigo].vida -= jogador.dano;
             }
             else if (inimigos[indexInimigo].acao == 1)
             {
-                cout << "\nPapel X Papel, nada aconteceu\n";
+                cout << "\nPapel X Papel, Empate, voces se causaram dano\n";
+                 jogador.vida -= inimigos[indexInimigo].dano / 2;
+                 inimigos[indexInimigo].vida -= jogador.dano / 2;
             }
             else if (inimigos[indexInimigo].acao == 2)
             {
@@ -90,11 +106,17 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             else if (inimigos[indexInimigo].acao == 1)
             {
                 cout << "\nTesoura X Papel, voce causou dano!\n";
+                  if (isCritico) {
+                    inimigos[indexInimigo].vida -= jogador.dano / 2;
+                    cout << ", Critico!";
+                }
                 inimigos[indexInimigo].vida -= jogador.dano;
             }
             else if (inimigos[indexInimigo].acao == 2)
             {
-                cout << "\nTesoura X Tesoura, nada aconteceu\n";
+                cout << "\nTesoura X Tesoura, Empate, voces se causaram dano\n";
+                 jogador.vida -= inimigos[indexInimigo].dano / 2;
+                 inimigos[indexInimigo].vida -= jogador.dano / 2;
             }
 
         }
@@ -120,6 +142,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
 
             cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
             jogador.pontuacao += 200;
+            jogador.exp += 100;
             system("pause");
             system("cls");
             return -1;

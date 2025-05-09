@@ -15,3 +15,4 @@
 #include "Combate.h"
 #include "Movimento.h"
 #include "Game.h"
+#include "SubirNivel.h"
