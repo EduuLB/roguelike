@@ -1,6 +1,6 @@
 #pragma once
 
-int venceu(Jogador jogador)
+int venceu(Jogador jogador, int minutos = 0)
 {
     cout << "\n\n\n";
         cout << R"(
@@ -12,6 +12,7 @@ int venceu(Jogador jogador)
 )" << endl;
     cout << "\n\n Voce derrotou o boss Univalison!! \n";
     cout << "\n A sua Pontuacao Final foi de: ";
+    jogador.pontuacao -= minutos * 2;
     corTexto(4);
     cout << jogador.pontuacao << "!! \n\n\n";
     corTexto(7);
@@ -19,7 +20,7 @@ int venceu(Jogador jogador)
 
 }
 
-int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
+int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos = 0)
 {
 
     while (jogador.vida > 0)
@@ -60,7 +61,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             else if (inimigos[indexInimigo].acao == 1)
             {
                 cout << "\nPedra X Papel, Voce tomou Dano!\n";
-                jogador.vida -= inimigos[indexInimigo].dano;
+                jogador.vida -= (inimigos[indexInimigo].dano - jogador.armadura);
             }
             else if (inimigos[indexInimigo].acao == 2)
             {
@@ -92,7 +93,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             else if (inimigos[indexInimigo].acao == 2)
             {
                 cout << "\nPapel X Tesoura, Voce tomou dano!\n";
-                jogador.vida -= inimigos[indexInimigo].dano;
+                jogador.vida -= (inimigos[indexInimigo].dano - jogador.armadura);
             }
 
         }
@@ -101,7 +102,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             if (inimigos[indexInimigo].acao == 0)
             {
                 cout << "\nTesoura X Pedra, voce tomou dano!\n";
-                jogador.vida -= inimigos[indexInimigo].dano;
+                jogador.vida -= (inimigos[indexInimigo].dano - jogador.armadura);
             }
             else if (inimigos[indexInimigo].acao == 1)
             {
@@ -133,7 +134,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             jogador.pontuacao += (jogador.vida * 150);
             jogador.pontuacao += 1000;
             system("cls");
-            venceu(jogador);
+           // venceu(jogador, minutos);
             break;
 
         }
@@ -142,7 +143,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
 
             cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
             jogador.pontuacao += 200;
-            jogador.exp += 100;
+            jogador.exp += inimigos[indexInimigo].exp;
             system("pause");
             system("cls");
             return -1;

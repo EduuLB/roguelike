@@ -1,10 +1,9 @@
 #pragma once
 using namespace std;
 
-int minutos = 0;
-int segundos = 0;
 
-void relogio() {
+void relogio(int & minutos, int & segundos) {
+
     // Mantém o tempo entre chamadas
     static auto ultimo_update = chrono::steady_clock::now();
 

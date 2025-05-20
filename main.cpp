@@ -4,8 +4,7 @@ using namespace std;
 
 int main()
 {
-
-
+    int dificuldadeEscolhida = 1;
     int opcao = 0;
     cout << "\n\n\n\n\n\n\n\n\n";
     corTexto(3);
@@ -20,7 +19,8 @@ int main()
 
     if (opcao == 1)   // Start Game
     {
-        jogo();
+        dificuldade(dificuldadeEscolhida);
+        jogo(dificuldadeEscolhida);
     }
     else if (opcao == 2)   // Guia
     {
@@ -39,7 +39,16 @@ int main()
         cout << "\n * Derrotar O Chefe: 1000 pontos.                              "
 			 "* Mapa: (" << char(241) << ") Revela o restante do mapa\n"; 
         cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
-    	     "* Arma: (©) Aumenta o Dano causado a inimigos \n\n\n\n\n"; 
+    	     "* Arma: (©) Aumenta o Dano causado a inimigos \n";
+    	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
+    	     "* Armadura: (@) Resiste ao dano causado por inimigos \n";
+    	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
+    	     "* Oculos: ("<< char(145) << ") Aumenta A chance de crítico \n";
+    	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
+    	     "* Pocao Grande: (U) Aumenta a vida Maxima \n\n\n\n\n";
+
+
+
         system("pause");
 
         system("cls");

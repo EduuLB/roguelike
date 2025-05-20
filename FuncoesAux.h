@@ -20,7 +20,7 @@ void centralizarTexto(const string& text)
     // Imprime os necess rios pra centralizar
     cout << string(padding, ' ') << text << endl;
 }
-void abrirPorta(int& chave, int x, int y)
+void abrirPorta(int& chave, int x, int y, int & exp)
 {
     if (chave > 0)
     {
@@ -32,5 +32,6 @@ void abrirPorta(int& chave, int x, int y)
         chave--;
         system("pause");
         system("cls");
+    	exp += 15;
     }
 }

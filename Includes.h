@@ -16,3 +16,4 @@
 #include "Movimento.h"
 #include "Game.h"
 #include "SubirNivel.h"
+#include "dificuldade.h"
