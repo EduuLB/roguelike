@@ -12,13 +12,15 @@ int main()
     corTexto(1);
     centralizarTexto("1- Iniciar Jogo\n");
     centralizarTexto("2- Guia\n");
-    centralizarTexto("3- Sair do Jogo\n");
+    centralizarTexto("3- Ranking\n");
+    centralizarTexto("4- Sair do Jogo\n");
     corTexto(7);
     cin >> opcao;
     system("cls"); // limpa o console ap s a op  o ser escolhida
 
     if (opcao == 1)   // Start Game
     {
+        
         dificuldade(dificuldadeEscolhida);
         jogo(dificuldadeEscolhida);
     }
@@ -53,6 +55,8 @@ int main()
 
         system("cls");
         return main();
+    } else if (opcao == 3) {
+		leRanking();
     }
     else   // Exit game
     {

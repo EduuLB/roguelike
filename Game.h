@@ -1,8 +1,10 @@
 #pragma once
+#include "Combate.h"
+#include "Mapas.h"
 #include "SubirNivel.h"
 int jogo(int dificuldadeEscolhida)
 {
-
+   
     // dificuldade Media adotada como padrao
 
     srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de números aleatórios
@@ -36,6 +38,8 @@ int jogo(int dificuldadeEscolhida)
     };
 
 
+	cout << "Primeiro, Qual é Seu Nome?";
+	cin >> jogador.nome;
 
     //ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
@@ -279,24 +283,50 @@ int jogo(int dificuldadeEscolhida)
 
         // Subir a Escada
         if (mapa[jogador.x][jogador.y] == 12) {
+
+        	mapa[jogador.x][jogador.y] = 0;
+        	jogador.exp += 5;
+
             if (jogador.mapa == 0) {
-				jogador.x = jogador.x;
-	            jogador.y = jogador.y;
+				jogador.x = 27;
+	            jogador.y = 58;
+            	inimigos[0] =  { 3, 28, 55, 1, 2, 500, 38, 7, 50}; // inimigo[0]
+    			inimigos[1] =  { 3, 2, 16, 1, 2, 500, 36, 7, 50}; // inimigo[1]
+    			inimigos[2] =  { 4, 8, 39, 1, 2, 500, 36, 7, 50}; // inimigo[2]
+		        inimigos[3] =  { 4, 15, 13, 1, 2, 500, 36, 7, 50}; // inimigo[3]
+		        inimigos[4] =  { 5, 11, 10, 1, 2, 500, 36, 7, 50}; // inimigo[4]
+		        inimigos[5] =  { 5, 28, 28, 1, 2, 500, 36, 7, 50}; // inimigo[6]
+    			inimigos[6] =  {20, 0, 0, 2, 3, 500, 38, 7, 50};// boss[7]};
+
+            	for (int linha = 0; linha < 30; linha++) {
+        			for (int coluna = 0; coluna < 60; coluna++) {
+        				mapaEscuro[linha][coluna] = 0;
+        				mapa[linha][coluna] = mapa2[linha][coluna];
+        			}
+        		}
+
             } else if (jogador.mapa == 1) {
                 jogador.x = jogador.x;
 	            jogador.y = jogador.y;
-            }
-        	mapa[jogador.x][jogador.y] = 0;
-            jogador.mapa++;
-            for (int linha = 0; linha < 30; linha++) {
-                for (int coluna = 0; coluna < 60; coluna++) {
-                    mapaEscuro[linha][coluna] = 0;
-                    mapa[linha][coluna] = mapa2[linha][coluna];
-                }
-            }
-            jogador.exp += 5;
-        }
+                inimigos[0] =  { 3, 28, 55, 1, 2, 500, 38, 7, 50}; // inimigo[0]
+    			inimigos[1] =  { 3, 2, 16, 1, 2, 500, 36, 7, 50}; // inimigo[1]
+    			inimigos[2] =  { 4, 8, 39, 1, 2, 500, 36, 7, 50}; // inimigo[2]
+		        inimigos[3] =  { 4, 15, 13, 1, 2, 500, 36, 7, 50}; // inimigo[3]
+		        inimigos[4] =  { 5, 11, 10, 1, 2, 500, 36, 7, 50}; // inimigo[4]
+		        inimigos[5] =  { 5, 28, 28, 1, 2, 500, 36, 7, 50}; // inimigo[6]
+    			inimigos[6] =  {20, 0, 0, 2, 3, 500, 38, 7, 50};// boss[7]};
 
+            	for (int linha = 0; linha < 30; linha++) {
+            		for (int coluna = 0; coluna < 60; coluna++) {
+	                    mapaEscuro[linha][coluna] = 0;
+	                    mapa[linha][coluna] = mapa3[linha][coluna];
+					}
+            	}
+            }
+        	jogador.mapa++;
+        }
+		jogador.minutos = minutos;
+        jogador.segundos = segundos;
         if (mapa[jogador.x][jogador.y] == 13) { // Armadura
             mapa[jogador.x][jogador.y] = 0;
 			jogador.cor = 8;
@@ -416,7 +446,9 @@ int jogo(int dificuldadeEscolhida)
                 {
                     for (int coluna = 0; coluna < 60; coluna++)
                     {
-                        mapa[linha][coluna] = backupItens[linha][coluna];
+						if (jogador.mapa == 0) mapa[linha][coluna] = backupItens[linha][coluna];
+                    	if (jogador.mapa == 1) mapa[linha][coluna] = backupItens2[linha][coluna];
+                    	if (jogador.mapa == 2) mapa[linha][coluna] = backupItens3[linha][coluna];
                         mapaEscuro[linha][coluna] = 0;
                     }
                 }

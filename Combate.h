@@ -1,7 +1,12 @@
 #pragma once
+#include "ranking.h"
+#include <sstream>
 
-int venceu(Jogador jogador, int minutos = 0)
+
+
+int venceu(Jogador jogador)
 {
+
     cout << "\n\n\n";
         cout << R"(
   ____   _    ____      _    ____  _____ _   _ ____    _  
@@ -12,10 +17,20 @@ int venceu(Jogador jogador, int minutos = 0)
 )" << endl;
     cout << "\n\n Voce derrotou o boss Univalison!! \n";
     cout << "\n A sua Pontuacao Final foi de: ";
-    jogador.pontuacao -= minutos * 2;
+    jogador.pontuacao -= jogador.minutos * 5;
     corTexto(4);
     cout << jogador.pontuacao << "!! \n\n\n";
     corTexto(7);
+
+		ostringstream oss;
+	    oss << setfill('0') << setw(2) << jogador.minutos
+	        << ":" << setfill('0') << setw(2) << jogador.segundos;
+
+	    jogador.tempo = oss.str();
+
+    
+    salvaRanking(jogador.nome, jogador.pontuacao, jogador.tempo);
+    leRanking();
     exit (0);
 
 }
@@ -134,7 +149,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos
             jogador.pontuacao += (jogador.vida * 150);
             jogador.pontuacao += 1000;
             system("cls");
-           // venceu(jogador, minutos);
+            venceu(jogador);
             break;
 
         }

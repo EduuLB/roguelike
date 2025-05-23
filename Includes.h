@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
+#include <string>
 #include "mapas.h"
 #include "Estruturas.h"
 #include "funcoesAux.h"
@@ -17,3 +18,4 @@
 #include "Game.h"
 #include "SubirNivel.h"
 #include "dificuldade.h"
+#include "ranking.h"
