@@ -2,12 +2,19 @@
 #include "Combate.h"
 #include "Mapas.h"
 #include "SubirNivel.h"
-int jogo(int dificuldadeEscolhida)
+
+char escolherDirecaoAleatoria() {
+    const char direcoes[] = { 'w', 'a', 's', 'd' };
+    int indice = rand() % 4;  // Gera um nÃºmero entre 0 e 3
+    return direcoes[indice];
+}
+
+int jogo(int dificuldadeEscolhida, bool jogarSozinho = false)
 {
    
     // dificuldade Media adotada como padrao
 
-    srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de números aleatórios
+    srand(static_cast<unsigned int>(time(0))); // inicializar o gerador de nï¿½meros aleatï¿½rios
     Jogador jogador;
     Inimigo inimigos[8];
     if (dificuldadeEscolhida == 0) {
@@ -38,8 +45,12 @@ int jogo(int dificuldadeEscolhida)
     };
 
 
-	cout << "Primeiro, Qual é Seu Nome?";
-	cin >> jogador.nome;
+	cout << "Primeiro, Qual ï¿½ Seu Nome?";
+    if (!jogarSozinho) {
+        cin >> jogador.nome;
+    }else {
+        jogador.nome = "random";
+    }
 
     //ALERTA: NAO MODIFICAR O TRECHO DE CODIGO, A SEGUIR.
     //INICIO: COMANDOS PARA QUE O CURSOR NAO FIQUE PISCANDO NA TELA
@@ -59,7 +70,7 @@ int jogo(int dificuldadeEscolhida)
 
     //Posicao inicial do inimigo no console
 
-    long long tempoAnterior = GetTickCount64(); // Tempo anterior do movimento do inimigo
+    long long tempoAnterior = GetTickCount(); // Tempo anterior do movimento do inimigo
     long long tempoAtual;
     auto ultimoSegundo = std::chrono::steady_clock::now();
 
@@ -75,7 +86,7 @@ int jogo(int dificuldadeEscolhida)
 	}
 	int minutos = 0;
 	int segundos = 0;
-    while (true) // Loop principal do jogo, roda continuamente até o jogador morrer ou escolher sair
+    while (true) // Loop principal do jogo, roda continuamente atï¿½ o jogador morrer ou escolher sair
     {
 
         //Posiciona o cursor no canto superior esquerdo do console
@@ -86,7 +97,7 @@ int jogo(int dificuldadeEscolhida)
         {
             for (int j = 0; j < 60; j++) // Loop pelas colunas do mapa (largura)
             {
-                // Se a posição atual for a mesma do jogador, imprime o personagem
+                // Se a posiï¿½ï¿½o atual for a mesma do jogador, imprime o personagem
                 if (i == jogador.x && j == jogador.y)
                 {
                     corTexto(jogador.cor);
@@ -95,7 +106,7 @@ int jogo(int dificuldadeEscolhida)
                     
                 }
 
-                // Se a posição atual for de um dos inimigos
+                // Se a posiï¿½ï¿½o atual for de um dos inimigos
                 else if (
                     i == inimigos[0].x && j == inimigos[0].y ||
                     i == inimigos[1].x && j == inimigos[1].y ||
@@ -112,7 +123,7 @@ int jogo(int dificuldadeEscolhida)
                     {
                         if (i == inimigos[idx].x && j == inimigos[idx].y)
                         {
-                            // Verifica se o jogador está no raio de 3 unidades em relação ao inimigo
+                            // Verifica se o jogador estï¿½ no raio de 3 unidades em relaï¿½ï¿½o ao inimigo
                             for (int di = -3; di <= 3 && !inimigoImpresso; di++)
                             {
                                 for (int dj = -3; dj <= 3 && !inimigoImpresso; dj++)
@@ -120,17 +131,17 @@ int jogo(int dificuldadeEscolhida)
                                     int posX = inimigos[idx].x + di;
                                     int posY = inimigos[idx].y + dj;
 
-                                    // Verifica se a posição é válida dentro do mapa
+                                    // Verifica se a posiï¿½ï¿½o ï¿½ vï¿½lida dentro do mapa
                                     if (posX >= 0 && posY >= 0 && mapa[posX] != 0)
                                     {
-                                        // Cálculo de distância de Manhattan entre jogador e inimigo
+                                        // Cï¿½lculo de distï¿½ncia de Manhattan entre jogador e inimigo
                                         int distanciaX = abs(jogador.x - posX);
                                         int distanciaY = abs(jogador.y - posY);
 
                                         if (distanciaX + distanciaY <= 3)
                                         {
 
-                                            cout << char(inimigos[idx].visual); // Imprime o inimigo visível
+                                            cout << char(inimigos[idx].visual); // Imprime o inimigo visï¿½vel
                                             inimigoImpresso = true;
                                         }
                                     }
@@ -139,7 +150,7 @@ int jogo(int dificuldadeEscolhida)
 
                             if (!inimigoImpresso)
                             {
-                                cout << " "; // Inimigo está fora do alcance de visão do jogador
+                                cout << " "; // Inimigo estï¿½ fora do alcance de visï¿½o do jogador
                             }
 
                             break; // Sai do loop do inimigo atual
@@ -147,10 +158,10 @@ int jogo(int dificuldadeEscolhida)
                     }
                 }
 
-                // Caso contrário, imprime o elemento do mapa
+                // Caso contrï¿½rio, imprime o elemento do mapa
                 else
                 {
-                    switch (mapaEscuro[i][j]) // mapaEscuro representa o que o jogador já enxergou
+                    switch (mapaEscuro[i][j]) // mapaEscuro representa o que o jogador jï¿½ enxergou
                     {
                     case 0:
                         cout << " ";
@@ -160,19 +171,19 @@ int jogo(int dificuldadeEscolhida)
                         break; // Parede
                     case 2:
                         cout << " ";
-                        break;// Espaço não especificado
+                        break;// Espaï¿½o nï¿½o especificado
                     case 3:
                         cout << char(178);
                         break;// Porta fechada
                     case 4:
                         cout << " ";
-                        break;// Espaço bloqueado
+                        break;// Espaï¿½o bloqueado
                     case 5:
                         cout << char(176);
                         break;// Corredor
                     case 6:
                         cout << char(117);
-                        break;// Poção de cura
+                        break;// Poï¿½ï¿½o de cura
                     case 7:
                         cout << char(88);
                         break;// Armadilha
@@ -206,7 +217,7 @@ int jogo(int dificuldadeEscolhida)
             cout << "\n"; // Fim da linha do mapa
         }
 
-        // Exibição das informações do jogador
+        // Exibiï¿½ï¿½o das informaï¿½ï¿½es do jogador
         corTexto(3);
 
         auto agora = std::chrono::steady_clock::now();
@@ -223,12 +234,12 @@ int jogo(int dificuldadeEscolhida)
         cout << "  || Exp: " << jogador.exp << " / " << jogador.expNecessaria << "\n\n";
 
 		relogio(minutos, segundos);
-    	std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    	Sleep(10);
 		int segundoAtual = segundos; 
         
         corTexto(7);
-        // Verifica se o jogador está sobre algum item especial
-        if (mapa[jogador.x][jogador.y] == 6) {  // Poção 
+        // Verifica se o jogador estï¿½ sobre algum item especial
+        if (mapa[jogador.x][jogador.y] == 6) {  // Poï¿½ï¿½o 
             jogador.pocao += 1;
             jogador.pontuacao += 50;
             mapa[jogador.x][jogador.y] = 0;
@@ -246,11 +257,11 @@ int jogo(int dificuldadeEscolhida)
             mapa[jogador.x][jogador.y] = 0;
         }
 
-        // Verifica se está próximo a uma porta para tentar abrir
+        // Verifica se estï¿½ prï¿½ximo a uma porta para tentar abrir
         if (mapa[jogador.x + 1][jogador.y] == 3 || mapa[jogador.x - 1][jogador.y] == 3 ||
                 mapa[jogador.x][jogador.y + 1] == 3 || mapa[jogador.x][jogador.y - 1] == 3)
         {
-            abrirPorta(jogador.chave, jogador.x, jogador.y, jogador.exp);
+            abrirPorta(jogador.chave, jogador.x, jogador.y, jogador.exp, jogarSozinho);
         }
 
         if (mapa[jogador.x][jogador.y] == 9) // Item para aumentar dano
@@ -277,7 +288,8 @@ int jogo(int dificuldadeEscolhida)
 
         // Se estiver perto do boss, inicia batalha
         if (mapa[jogador.x][jogador.y] == 11){
-            batalha(jogador, inimigos, 6);
+            cout << jogarSozinho;
+            batalha(jogador, inimigos, 6, jogarSozinho);
         }
 
         // Subir a Escada
@@ -345,8 +357,8 @@ int jogo(int dificuldadeEscolhida)
             jogador.exp += 5;
         }
 
-    	tempoAtual = GetTickCount64();
-        // Verifica se é hora de mover os inimigos
+    	tempoAtual = GetTickCount();
+        // Verifica se ï¿½ hora de mover os inimigos
         
         if (tempoAtual - tempoAnterior >= inimigos[0].velocidade) // A cada 500ms
         {
@@ -364,17 +376,17 @@ int jogo(int dificuldadeEscolhida)
             if (jogador.x == inimigos[controle].x && jogador.y == inimigos[controle].y)
             {
                 // Chama batalha, inimigo pode ser derrotado ou mover
-                inimigos[controle].x = batalha(jogador, inimigos, controle);
+                inimigos[controle].x = batalha(jogador, inimigos, controle, jogarSozinho);
                 inimigos[controle].y = inimigos[controle].x;
             }
         }
         
         ///Controle de movimento do jogador
-        if (_kbhit()) // Se alguma tecla foi pressionada
+        if (_kbhit() || jogarSozinho) // Se alguma tecla foi pressionada
         {
             mapaEscuro[jogador.x][jogador.y] = mapa[jogador.x][jogador.y]; // Atualiza mapa explorado
 
-            // Atualiza área de visão do jogador em 3 unidades ao redor
+            // Atualiza ï¿½rea de visï¿½o do jogador em 3 unidades ao redor
             for (int i = -3; i < 3; i++)
             {
                 if (mapa[jogador.x + i] != 0 && (jogador.x + i) >= 0)
@@ -390,7 +402,12 @@ int jogo(int dificuldadeEscolhida)
                 }
             }
 
-            tecla = _getch(); // Captura a tecla
+            if (!jogarSozinho) {
+                tecla = _getch(); // Captura a tecla
+            }else {
+                tecla = escolherDirecaoAleatoria();
+            }
+
             switch (tecla)
             {
             case 72:
@@ -409,14 +426,14 @@ int jogo(int dificuldadeEscolhida)
             case 'd': // direita
                 if (mapa[jogador.x][jogador.y + 1] == 0 || mapa[jogador.x][jogador.y + 1] > 4) jogador.y++;
                 break;
-            case 'e': // usar poção
+            case 'e': // usar poï¿½ï¿½o
                 if (jogador.pocao > 0 && jogador.vida < jogador.vidaMaxima) {
                     jogador.vida += 2;
                     jogador.pocao--;
                     if (jogador.vida > jogador.vidaMaxima) jogador.vida = jogador.vidaMaxima;
                     break;
                 }
-        	case 'f': // usar poção
+        	case 'f': // usar poï¿½ï¿½o
                 if (jogador.pocaoGrande > 0) {
                     jogador.vida += 3;
                     jogador.vidaMaxima += 3;

@@ -13,14 +13,14 @@ int main()
     centralizarTexto("1- Iniciar Jogo\n");
     centralizarTexto("2- Guia\n");
     centralizarTexto("3- Ranking\n");
-    centralizarTexto("4- Sair do Jogo\n");
+    centralizarTexto("4- Jogar Sozinho\n");
+    centralizarTexto("5- Sair do Jogo\n");
     corTexto(7);
     cin >> opcao;
     system("cls"); // limpa o console ap s a op  o ser escolhida
 
     if (opcao == 1)   // Start Game
     {
-        
         dificuldade(dificuldadeEscolhida);
         jogo(dificuldadeEscolhida);
     }
@@ -41,11 +41,11 @@ int main()
         cout << "\n * Derrotar O Chefe: 1000 pontos.                              "
 			 "* Mapa: (" << char(241) << ") Revela o restante do mapa\n"; 
         cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
-    	     "* Arma: (©) Aumenta o Dano causado a inimigos \n";
+    	     "* Arma: (ï¿½) Aumenta o Dano causado a inimigos \n";
     	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
     	     "* Armadura: (@) Resiste ao dano causado por inimigos \n";
     	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
-    	     "* Oculos: ("<< char(145) << ") Aumenta A chance de crítico \n";
+    	     "* Oculos: ("<< char(145) << ") Aumenta A chance de crï¿½tico \n";
     	cout << "\n * Ao terminar, cada vida sobrando te da 150 pontos.           "
     	     "* Pocao Grande: (U) Aumenta a vida Maxima \n\n\n\n\n";
 
@@ -55,9 +55,13 @@ int main()
 
         system("cls");
         return main();
-    } else if (opcao == 3) {
+    }
+	else if (opcao == 3) {
 		leRanking();
     }
+	else if (opcao == 4) {
+		jogo(1,true);
+	}
     else   // Exit game
     {
         cout << "\n\n\n\n\n\n\n\n\n\n";

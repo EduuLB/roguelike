@@ -20,7 +20,7 @@ void centralizarTexto(const string& text)
     // Imprime os necess rios pra centralizar
     cout << string(padding, ' ') << text << endl;
 }
-void abrirPorta(int& chave, int x, int y, int & exp)
+void abrirPorta(int& chave, int x, int y, int & exp, bool jogarSozinho = false)
 {
     if (chave > 0)
     {
@@ -30,7 +30,9 @@ void abrirPorta(int& chave, int x, int y, int & exp)
         if (mapa[x][y - 1] == 3) mapa[x][y - 1] = 0;
         cout << "\nPorta Aberta!\n";
         chave--;
-        system("pause");
+        if (!jogarSozinho) {
+            system("pause");
+        }
         system("cls");
     	exp += 15;
     }

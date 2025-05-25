@@ -2,7 +2,11 @@
 #include "ranking.h"
 #include <sstream>
 
-
+int escolherNumeroAleatorio() {
+    const char numeros[] = { '1', '2', '3' };
+    int indice = rand() % 3;  // Gera um número entre 0 e 2
+    return numeros[indice];
+}
 
 int venceu(Jogador jogador)
 {
@@ -35,7 +39,7 @@ int venceu(Jogador jogador)
 
 }
 
-int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
+int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, bool jogarSozinho = false)
 {
 
     while (jogador.vida > 0)
@@ -60,7 +64,12 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
         bool isCritico = false;
         int numAleatorio = rand() % 100;
         if (numAleatorio <= jogador.critico) isCritico = true;
-        cin >> escolha;
+        if (!jogarSozinho) {
+            cin >> escolha;
+        }else {
+            escolha = escolherNumeroAleatorio();
+            cout << escolha;
+        }
 
         inimigos[indexInimigo].acao = rand() % 3;
         
@@ -141,8 +150,9 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             cout << "\n escolha Invalida!";
 
         }
-        system("pause");
-
+        if (!jogarSozinho) {
+            system("pause");
+        }
         if (inimigos[indexInimigo].vida <= 0 && inimigos[indexInimigo].cor == 5)
         {
 
@@ -158,7 +168,9 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             jogador.pontuacao += 200;
             jogador.exp += inimigos[indexInimigo].exp;
             mapa[jogador.x][jogador.y] = 0;
-            system("pause");
+            if (!jogarSozinho) {
+                system("pause");
+            }
             system("cls");
             return -1;
         }
@@ -168,13 +180,12 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
             cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
             jogador.pontuacao += 200;
             jogador.exp += inimigos[indexInimigo].exp;
-            system("pause");
+            if (!jogarSozinho) {
+                system("pause");
+            }
             system("cls");
             return -1;
         }
-
-
-
 
     }
 
