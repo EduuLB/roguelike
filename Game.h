@@ -13,28 +13,28 @@ int jogo(int dificuldadeEscolhida)
     if (dificuldadeEscolhida == 0) {
         inimigos[0] =  { 3, 1, 1, 1, 2, 700, 38, 7, 50}; // inimigo[0]
     	inimigos[1] =  { 3, 2, 16, 1, 2, 700, 38, 7, 50}; // inimigo[1]
-    	inimigos[2] =  { 4, 8, 39, 1, 2, 700, 36, 7, 50}; // inimigo[2]
+    	inimigos[2] =  { 4, 8, 39, 1, 2, 700, 38, 7, 50}; // inimigo[2]
         inimigos[3] =  { 4, 15, 13, 1, 2, 700, 36, 7, 50}; // inimigo[3]
         inimigos[4] =  { 5, 11, 10, 1, 2, 700, 36, 7, 50}; // inimigo[4]
         inimigos[5] =  { 5, 28, 28, 1, 2, 700, 36, 7, 50}; // inimigo[6]
-    	inimigos[6] =  {20, 0, 0, 2, 3, 700, 38, 7, 50};// boss[7]};
+    	inimigos[6] =  {20, 0, 0, 2, 3, 0, 38, 7, 50};// boss[7]};
 
     } else if (dificuldadeEscolhida == 1) {
         inimigos[0] =  { 3, 1, 1, 1, 2, 500, 38, 7, 50}; // inimigo[0]
-    	inimigos[1] =  { 3, 2, 16, 1, 2, 500, 36, 7, 50}; // inimigo[1]
-    	inimigos[2] =  { 4, 8, 39, 1, 2, 500, 36, 7, 50}; // inimigo[2]
+    	inimigos[1] =  { 3, 2, 16, 1, 2, 500, 38, 7, 50}; // inimigo[1]
+    	inimigos[2] =  { 4, 8, 39, 1, 2, 500, 38, 7, 50}; // inimigo[2]
         inimigos[3] =  { 4, 15, 13, 1, 2, 500, 36, 7, 50}; // inimigo[3]
         inimigos[4] =  { 5, 11, 10, 1, 2, 500, 36, 7, 50}; // inimigo[4]
         inimigos[5] =  { 5, 28, 28, 1, 2, 500, 36, 7, 50}; // inimigo[6]
-    	inimigos[6] =  {20, 0, 0, 2, 3, 500, 38, 7, 50};// boss[7]};
+    	inimigos[6] =  {20, 0, 0, 2, 3, 0, 38, 7, 50};// boss[7]};
     } else if (dificuldadeEscolhida == 2) {
         inimigos[0] =  { 3, 1, 1, 1, 2, 250, 38, 7, 50}; // inimigo[0]
     	inimigos[1] =  { 3, 2, 16, 1, 2, 250, 38, 7, 50}; // inimigo[1]
-    	inimigos[2] =  { 4, 8, 39, 1, 2, 250, 36, 7, 50}; // inimigo[2]
+    	inimigos[2] =  { 4, 8, 39, 1, 2, 250, 38, 7, 50}; // inimigo[2]
         inimigos[3] =  { 4, 15, 13, 1, 2, 250, 36, 7, 50}; // inimigo[3]
         inimigos[4] =  { 5, 11, 10, 1, 2, 250, 36, 7, 50}; // inimigo[4]
         inimigos[5] =  { 5, 28, 28, 1, 2, 250, 36, 7, 50}; // inimigo[6]
-    	inimigos[6] =  {20, 0, 0, 2, 3, 250, 38, 7, 50};// boss[7]};
+    	inimigos[6] =  {20, 0, 0, 2, 3, 0, 38, 7, 50};// boss[7]};
     };
 
 
@@ -225,7 +225,7 @@ int jogo(int dificuldadeEscolhida)
 		relogio(minutos, segundos);
     	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		int segundoAtual = segundos; 
-        // cout << "Nivel: " << 2 << " ||   Level:";
+        
         corTexto(7);
         // Verifica se o jogador está sobre algum item especial
         if (mapa[jogador.x][jogador.y] == 6) {  // Poção 
@@ -276,9 +276,8 @@ int jogo(int dificuldadeEscolhida)
         }
 
         // Se estiver perto do boss, inicia batalha
-        if (mapa[jogador.x + 1][jogador.y] == 11 || mapa[jogador.x - 1][jogador.y] == 11 ||
-			mapa[jogador.x][jogador.y + 1] == 11 || mapa[jogador.x][jogador.y - 1] == 11) {
-            batalha(jogador, inimigos, 7);
+        if (mapa[jogador.x][jogador.y] == 11){
+            batalha(jogador, inimigos, 6);
         }
 
         // Subir a Escada
@@ -289,14 +288,14 @@ int jogo(int dificuldadeEscolhida)
 
             if (jogador.mapa == 0) {
 				jogador.x = 27;
-	            jogador.y = 58;
-            	inimigos[0] =  { 3, 28, 55, 1, 2, 500, 38, 7, 50}; // inimigo[0]
-    			inimigos[1] =  { 3, 2, 16, 1, 2, 500, 36, 7, 50}; // inimigo[1]
-    			inimigos[2] =  { 4, 8, 39, 1, 2, 500, 36, 7, 50}; // inimigo[2]
-		        inimigos[3] =  { 4, 15, 13, 1, 2, 500, 36, 7, 50}; // inimigo[3]
-		        inimigos[4] =  { 5, 11, 10, 1, 2, 500, 36, 7, 50}; // inimigo[4]
-		        inimigos[5] =  { 5, 28, 28, 1, 2, 500, 36, 7, 50}; // inimigo[6]
-    			inimigos[6] =  {20, 0, 0, 2, 3, 500, 38, 7, 50};// boss[7]};
+	            jogador.y = 55;
+            	inimigos[0] =  { 3, 19, 48, 1, 2, 500, 38, 7, 50}; // inimigo[0]
+    			inimigos[1] =  { 3, 28, 34, 1, 2, 500, 38, 7, 50}; // inimigo[1]
+    			inimigos[2] =  { 4, 20, 30, 1, 2, 500, 38, 7, 50}; // inimigo[2]
+    			inimigos[3] =  { 4, 18, 16, 1, 2, 500, 36, 7, 50}; // inimigo[3]
+		        inimigos[4] =  { 5, 21, 7, 1, 2, 500, 36, 7, 50}; // inimigo[4]
+		        inimigos[5] =  { 5, 4, 14, 1, 2, 500, 36, 7, 50}; // inimigo[6]
+    			inimigos[6] =  {30, 8, 4, 2, 3, 0, 38, 7, 50};// boss[7]};
 
             	for (int linha = 0; linha < 30; linha++) {
         			for (int coluna = 0; coluna < 60; coluna++) {
@@ -306,15 +305,15 @@ int jogo(int dificuldadeEscolhida)
         		}
 
             } else if (jogador.mapa == 1) {
-                jogador.x = jogador.x;
-	            jogador.y = jogador.y;
-                inimigos[0] =  { 3, 28, 55, 1, 2, 500, 38, 7, 50}; // inimigo[0]
-    			inimigos[1] =  { 3, 2, 16, 1, 2, 500, 36, 7, 50}; // inimigo[1]
-    			inimigos[2] =  { 4, 8, 39, 1, 2, 500, 36, 7, 50}; // inimigo[2]
-		        inimigos[3] =  { 4, 15, 13, 1, 2, 500, 36, 7, 50}; // inimigo[3]
-		        inimigos[4] =  { 5, 11, 10, 1, 2, 500, 36, 7, 50}; // inimigo[4]
-		        inimigos[5] =  { 5, 28, 28, 1, 2, 500, 36, 7, 50}; // inimigo[6]
-    			inimigos[6] =  {20, 0, 0, 2, 3, 500, 38, 7, 50};// boss[7]};
+                jogador.x = 1;
+	            jogador.y = 58;
+                inimigos[0] =  { 3, 11, 52, 1, 2, 500, 38, 7, 50}; // inimigo[0]
+    			inimigos[1] =  { 3, 27, 14, 1, 2, 500, 38, 7, 50}; // inimigo[1]
+            	inimigos[2] =  { 4, 17, 2, 1, 2, 500, 38, 7, 50}; // inimigo[2]
+		        inimigos[3] =  { 4, 26, 55, 1, 2, 500, 36, 7, 50}; // inimigo[3]
+		        inimigos[4] =  { 5, 27, 32, 1, 2, 500, 36, 7, 50}; // inimigo[4]
+		        inimigos[5] =  { 5, 1, 1, 1, 2, 500, 36, 7, 50}; // inimigo[6]
+    			inimigos[6] =  {35, 0, 0, 2, 3, 10, 38, 5, 50};// boss[7]};
 
             	for (int linha = 0; linha < 30; linha++) {
             		for (int coluna = 0; coluna < 60; coluna++) {

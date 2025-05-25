@@ -4,13 +4,13 @@ using namespace std;
 struct Jogador
 {
     int x = 5, y = 1;
-    int vida = 20;
+    int vida = 10;
     int vidaMaxima = 10;
     int pontuacao = 0;
     int pocao = 0;
     int pocaoGrande = 1;
     int chave = 0;
-    int dano = 10;
+    int dano = 3;
     int exp = 0;
     int expNecessaria = 100;
     int nivel = 1;
@@ -21,7 +21,7 @@ struct Jogador
     int armadura = 0;
     int minutos = 0;
     int segundos = 0;
-    string nome = "Eduardo";
+    string nome;
     string tempo;
 };
 

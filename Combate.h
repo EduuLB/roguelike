@@ -35,7 +35,7 @@ int venceu(Jogador jogador)
 
 }
 
-int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos = 0)
+int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo)
 {
 
     while (jogador.vida > 0)
@@ -45,7 +45,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos
         cout << "\n\n";
         if (indexInimigo == 7) // index do boss
         {
-            centralizarTexto("Voce encontrou O Chefe! Se prepare");
+            centralizarTexto("Voce encontrou Um Chefe! Se prepare");
         }
         else
         {
@@ -143,7 +143,7 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos
         }
         system("pause");
 
-        if (inimigos[indexInimigo].vida <= 0 && indexInimigo == 7)
+        if (inimigos[indexInimigo].vida <= 0 && inimigos[indexInimigo].cor == 5)
         {
 
             jogador.pontuacao += (jogador.vida * 150);
@@ -153,7 +153,16 @@ int batalha(Jogador& jogador, Inimigo inimigos[8], int indexInimigo, int minutos
             break;
 
         }
-        if (inimigos[indexInimigo].vida <= 0 && indexInimigo < 7)
+        if (inimigos[indexInimigo].vida <= 0 && inimigos[indexInimigo].velocidade == 0) {
+        	cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
+            jogador.pontuacao += 200;
+            jogador.exp += inimigos[indexInimigo].exp;
+            mapa[jogador.x][jogador.y] = 0;
+            system("pause");
+            system("cls");
+            return -1;
+        }
+        if (inimigos[indexInimigo].vida <= 0 && inimigos[indexInimigo].cor != 5)
         {
 
             cout << "\nInimigo Derrotado!\n\n\n\n\n\n\n";
